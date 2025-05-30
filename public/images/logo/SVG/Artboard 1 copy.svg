@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-2 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-3 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-4 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-5 {
+        letter-spacing: 0em;
+      }
+
+      .cls-6 {
+        letter-spacing: 0em;
+      }
+
+      .cls-7 {
+        letter-spacing: 0em;
+      }
+
+      .cls-8 {
+        font-family: Montserrat-Regular, Montserrat;
+      }
+
+      .cls-8, .cls-9 {
+        font-size: 12.12px;
+      }
+
+      .cls-8, .cls-9, .cls-10 {
+        fill: #efb000;
+      }
+
+      .cls-9 {
+        font-family: Montserrat-Bold, Montserrat;
+        font-weight: 700;
+      }
+
+      .cls-11 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-12 {
+        letter-spacing: 0em;
+      }
+
+      .cls-13 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-14 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-15 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <g>
+    <path class="cls-10" d="m126.25,106.73h0c0,3.78,3.07,6.85,6.85,6.85h14.1v.04h19.27c3.78,0,6.85-3.07,6.85-6.85v-.04c0-3.78-3.07-6.85-6.85-6.85h-33.37c-3.78,0-6.85,3.07-6.85,6.85Zm16.98,20.71h-6.83c-5.6,0-10.14,4.54-10.14,10.14v16.68c0,4.69,3.8,8.49,8.49,8.49h0c4.69,0,8.49-3.8,8.49-8.49v-9.43c0-2.01,1.63-3.63,3.63-3.63h16.01c3.78,0,6.85-3.07,6.85-6.85h0c0-3.81-3.09-6.89-6.89-6.89h-19.6Z"/>
+    <path class="cls-10" d="m97.25,99.88h-20.43c-3.87,0-7.01,3.14-7.01,7.01h0c0,3.87,3.14,7.01,7.01,7.01h19.4c7.03,0,10.55,3.41,10.55,9.25s-3.52,9.16-10.55,9.16h-16.67c-5.38,0-9.74,4.36-9.74,9.74v12.22c0,4.69,3.8,8.49,8.49,8.49h0c4.69,0,8.49-3.8,8.49-8.49v-6.32c0-.9.73-1.62,1.62-1.62h8.84c16.38,0,26.66-8.89,26.66-23.17s-10.29-23.26-26.66-23.26Z"/>
+    <path class="cls-10" d="m203.53,99.88h-20.43c-3.87,0-7.01,3.14-7.01,7.01h0c0,3.87,3.14,7.01,7.01,7.01h19.4c7.03,0,10.55,3.41,10.55,9.25s-3.52,9.16-10.55,9.16h-16.67c-5.38,0-9.74,4.36-9.74,9.74v12.22c0,4.69,3.8,8.49,8.49,8.49h0c4.69,0,8.49-3.8,8.49-8.49v-6.32c0-.9.73-1.62,1.62-1.62h8.84c16.38,0,26.66-8.89,26.66-23.17s-10.29-23.26-26.66-23.26Z"/>
+  </g>
+  <text class="cls-9" transform="translate(32.76 184.27) scale(.91 1)"><tspan class="cls-3" x="0" y="0">P</tspan><tspan class="cls-11" x="8.32" y="0">A</tspan><tspan x="17.18" y="0">T</tspan><tspan class="cls-6" x="24.67" y="0">H</tspan><tspan class="cls-4" x="34.41" y="0">W</tspan><tspan class="cls-13" x="48.04" y="0">A</tspan><tspan x="56.8" y="0">Y </tspan><tspan class="cls-15" x="68.42" y="0">F</tspan><tspan x="76.08" y="0">OUN</tspan><tspan class="cls-7" x="105.64" y="0">D</tspan><tspan class="cls-2" x="115.53" y="0">A</tspan><tspan x="124.39" y="0">TION </tspan><tspan class="cls-15" x="159.3" y="0">F</tspan><tspan class="cls-5" x="166.95" y="0">OR THE POOR</tspan></text>
+  <text class="cls-8" transform="translate(53.98 196.94) scale(.91 1)"><tspan x="0" y="0">UN</tspan><tspan class="cls-14" x="19.45" y="0">L</tspan><tspan x="26.41" y="0">OCKING HUMAN P</tspan><tspan class="cls-1" x="141.39" y="0">O</tspan><tspan x="151.43" y="0">TENTIA</tspan><tspan class="cls-12" x="195.64" y="0">L</tspan><tspan x="202.68" y="0">S</tspan></text>
+</svg>
