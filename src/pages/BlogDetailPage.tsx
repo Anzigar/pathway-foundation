@@ -8,7 +8,7 @@ const BlogDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState(blogPosts.find(p => p.slug === slug));
   const [relatedPosts, setRelatedPosts] = useState(blogPosts.filter(p => 
-    p.slug !== slug && p.category.id === post?.category.id
+    p.slug !== slug && p.category?.id === post?.category?.id
   ).slice(0, 3));
 
   useEffect(() => {
@@ -17,9 +17,9 @@ const BlogDetailPage: React.FC = () => {
     setPost(currentPost);
     
     // Update related posts
-    if (currentPost) {
+    if (currentPost && currentPost.category) {
       const related = blogPosts.filter(p => 
-        p.slug !== slug && p.category.id === currentPost.category.id
+        p.slug !== slug && p.category?.id === currentPost.category.id
       ).slice(0, 3);
       setRelatedPosts(related);
     }
@@ -60,9 +60,11 @@ const BlogDetailPage: React.FC = () => {
               )}
               
               <div className="blog-meta">
-                <Link to={`/blog/category/${post.category.slug}`} className="category-link">
-                  {post.category.name}
-                </Link>
+                {post.category && (
+                  <Link to={`/blog/category/${post.category.slug}`} className="category-link">
+                    {post.category.name}
+                  </Link>
+                )}
                 
                 {post.reading_time_minutes && (
                   <div className="meta-item">
@@ -111,7 +113,7 @@ const BlogDetailPage: React.FC = () => {
                 <h3 className="widget-title">Categories</h3>
                 <ul className="categories-list">
                   {blogCategories.map(category => (
-                    <li key={category.id} className={post.category.id === category.id ? "active" : ""}>
+                    <li key={category.id} className={post.category && post.category.id === category.id ? "active" : ""}>
                       <Link to={`/blog/category/${category.slug}`}>
                         {category.name}
                       </Link>

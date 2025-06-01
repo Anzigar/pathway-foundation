@@ -1,6 +1,6 @@
 import React from 'react';
-// import PageHeader from '../components/shared/PageHeader';
-// import ContactForm from '../components/Contact/ContactForm';
+import PageHeader from '../components/shared/PageHeader';
+import ContactForm from '../components/Contact/ContactForm';
 import ContactInfo from '../components/Contact/ContactInfo';
 
 const ContactPage: React.FC = () => {

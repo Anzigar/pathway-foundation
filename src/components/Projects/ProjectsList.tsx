@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './ProjectsList.css'; // Import the CSS file
 
@@ -79,7 +77,7 @@ const ProjectsList: React.FC = () => {
         ) : (
           <div className="no-projects-container">
             <div className="no-projects">
-              <FontAwesomeIcon icon={faProjectDiagram} className="no-data-icon" />
+              {/* <FontAwesomeIcon icon={faProjectDiagram} className="no-data-icon" /> */}
               <h3>No Current Projects</h3>
               <p>There are currently no active projects. Please check our past projects below.</p>
             </div>
@@ -108,7 +106,7 @@ const ProjectsList: React.FC = () => {
         ) : (
           <div className="no-projects-container">
             <div className="no-projects">
-              <FontAwesomeIcon icon={faProjectDiagram} className="no-data-icon" />
+              {/* <FontAwesomeIcon icon={faProjectDiagram} className="no-data-icon" /> */}
               <h3>No Past Projects</h3>
               <p>There are no completed projects to display at this time.</p>
             </div>
