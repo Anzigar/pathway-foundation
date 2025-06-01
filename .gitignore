@@ -39,41 +39,53 @@ functions/node_modules/
 # AWS Amplify
 .amplify/
 .amplify-hosting/
+amplify/\#current-cloud-backend
+amplify/.config/local-*
+amplify/mock-data
+amplify/backend/amplify-meta.json
+amplify/backend/awscloudformation
+amplify/backend/function/*/node_modules/*
+amplify/backend/function/*/src/node_modules/*
+amplify/backend/function/*/dist/*
 dist/
-
-# NPM lock file exceptions
-# NOTE: DO NOT IGNORE package-lock.json for Amplify deployments
-# Having the lock file in git ensures consistent builds
-# package-lock.json should be committed to git
+aws-build/
+amplify-build/
+# Critical for Amplify: DO NOT ignore these if using Amplify environment variables
+!amplify/team-provider-info.json
+!src/aws-exports.js
 
 # Build artifacts
 build/
 *.log
-.npm/
-_logs/
-.cache-loader/
-aws-build/
-build-output/
-codebuild_build.sh
 artifacts/
-amplify-build/
+codebuild_build.sh
+build-output/
 
-# misc
-.DS_Store
-*.pem
-
-# debug
+# NPM related
+.npm/
+.npm/_logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+# NOTE: DO NOT IGNORE package-lock.json for Amplify deployments
+# Having the lock file in git ensures consistent builds
+
+# misc
+.DS_Store
+*.pem
 codebuild-debug.log
 *.build.log
 aws-amplify-*.log
 
-# env files (can opt-in for committing if needed)
+# Environment variables
 .env*
-# But allow environment configuration for Amplify
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+# Environment config exceptions
 !.env.local.example
 !.env.example
 
@@ -97,27 +109,16 @@ firebase.json
 *.swp
 *.swo
 
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-# Critical for Amplify: DO NOT ignore these if using Amplify environment variables
-!amplify/team-provider-info.json
-!src/aws-exports.js
-
 # Caches
 .cache/
 .parcel-cache/
 *.pack
 .eslintcache
 .stylelintcache
-.npm/_logs/
+.cache-loader/
 
 # Scripts
 setup.sh
-node_modules/
 
 # Temporary files
 *.tmp
