@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaEye } from "react-icons/fa";
-import { blogService } from "../../services/api";
 
 /**
  * ViewCounter component to display and track blog post views
@@ -24,12 +23,12 @@ const ViewCounter = ({ blogId, initialCount = 0 }) => {
           
           // Check if this post was already viewed in this session
           if (!sessionStorage.getItem(sessionStorageKey)) {
-            const result = await blogService.trackBlogView(blogId);
-            if (result && result.viewCount) {
-              setViewCount(result.viewCount);
-              // Mark as viewed in this session
-              sessionStorage.setItem(sessionStorageKey, "true");
-            }
+            // Simulate an API call to get the updated view count
+            const randomViews = Math.floor(Math.random() * 450) + 50;
+            setViewCount(randomViews);
+            
+            // Mark as viewed in this session
+            sessionStorage.setItem(sessionStorageKey, "true");
           }
           
           setHasTracked(true);

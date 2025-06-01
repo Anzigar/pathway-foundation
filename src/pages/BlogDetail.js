@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import styled from "styled-components";
-import { FaCalendarAlt, FaUserAlt, FaTag, FaShare } from "react-icons/fa";
-import PageBanner from "../components/ui/PageBanner";
-import CallToAction from "../components/sections/CallToAction";
-import ViewCounter from "../components/ui/ViewCounter";
-import { blogService } from "../services/api";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import { FaCalendarAlt, FaUserAlt, FaTag, FaShare } from 'react-icons/fa';
+import PageBanner from '../components/ui/PageBanner';
+import CallToAction from '../components/sections/CallToAction';
+import ViewCounter from '../components/ui/ViewCounter';
+import { blogPosts } from '../data/blogPosts';
 
 /**
  * BlogDetail component for displaying a single blog post
@@ -14,37 +14,26 @@ import { blogService } from "../services/api";
  */
 const BlogDetail = () => {
   const { slug } = useParams();
-  const [blogPost, setBlogPost] = useState(null);
+  const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [relatedPosts, setRelatedPosts] = useState([]);
 
   // Fetch blog post data
   useEffect(() => {
-    const fetchBlogPost = async () => {
-      try {
-        setLoading(true);
-        const result = await blogService.getBlogPostBySlug(slug);
-        setBlogPost(result);
-        
-        // Also fetch related posts
-        if (result.category) {
-          const relatedResult = await blogService.getBlogPosts(1, 3, result.category);
-          // Filter out the current post from related posts
-          setRelatedPosts(
-            relatedResult.data.filter(post => post.id !== result.id)
-          );
-        }
-        
-        setLoading(false);
-      } catch (err) {
-        console.error("Failed to fetch blog post:", err);
-        setError("Failed to load this blog post. Please try again later.");
-        setLoading(false);
+    // Replace API call with direct data filtering
+    try {
+      const foundPost = blogPosts.find(p => p.slug === slug);
+      if (foundPost) {
+        setPost(foundPost);
+      } else {
+        setError('Blog post not found');
       }
-    };
-    
-    fetchBlogPost();
+      setLoading(false);
+    } catch (err) {
+      console.error('Error loading blog post:', err);
+      setError('Failed to load blog post');
+      setLoading(false);
+    }
   }, [slug]);
 
   if (loading) {
@@ -63,7 +52,7 @@ const BlogDetail = () => {
     );
   }
 
-  if (error || !blogPost) {
+  if (error || !post) {
     return (
       <>
         <PageBanner
@@ -84,8 +73,8 @@ const BlogDetail = () => {
     <>
       <PageBanner
         title="Blog"
-        subtitle={blogPost.title}
-        backgroundImage={blogPost.image}
+        subtitle={post.title}
+        backgroundImage={post.image}
       />
       
       <BlogDetailSection>
@@ -95,18 +84,18 @@ const BlogDetail = () => {
               <ArticleMeta>
                 <MetaItem>
                   <FaCalendarAlt />
-                  <span>{blogPost.date}</span>
+                  <span>{post.date}</span>
                 </MetaItem>
                 <MetaItem>
                   <FaUserAlt />
-                  <span>{blogPost.author}</span>
+                  <span>{post.author}</span>
                 </MetaItem>
                 <MetaItem>
                   <FaTag />
-                  <span>{blogPost.category}</span>
+                  <span>{post.category}</span>
                 </MetaItem>
                 <MetaItem>
-                  <ViewCounter blogId={blogPost.id} initialCount={blogPost.viewCount || 0} />
+                  <ViewCounter blogId={post.id} initialCount={post.viewCount || 0} />
                 </MetaItem>
               </ArticleMeta>
               
@@ -120,37 +109,17 @@ const BlogDetail = () => {
               </ShareContainer>
             </ArticleHeader>
             
-            <ArticleContent dangerouslySetInnerHTML={{ __html: blogPost.content }} />
+            <ArticleContent dangerouslySetInnerHTML={{ __html: post.content }} />
             
-            {blogPost.tags && blogPost.tags.length > 0 && (
+            {post.tags && post.tags.length > 0 && (
               <TagsContainer>
                 <TagsTitle>Tags:</TagsTitle>
-                {blogPost.tags.map((tag, index) => (
+                {post.tags.map((tag, index) => (
                   <Tag key={index} to={`/news-events/blog/tag/${tag}`}>{tag}</Tag>
                 ))}
               </TagsContainer>
             )}
           </ArticleContainer>
-          
-          {relatedPosts.length > 0 && (
-            <RelatedSection>
-              <RelatedTitle>Related Articles</RelatedTitle>
-              <RelatedGrid>
-                {relatedPosts.map(post => (
-                  <RelatedCard key={post.id}>
-                    <RelatedImageContainer>
-                      <RelatedImage src={post.image} alt={post.title} />
-                    </RelatedImageContainer>
-                    <RelatedContent>
-                      <RelatedDate>{post.date}</RelatedDate>
-                      <RelatedCardTitle>{post.title}</RelatedCardTitle>
-                      <RelatedLink to={`/news-events/blog/${post.slug}`}>Read More</RelatedLink>
-                    </RelatedContent>
-                  </RelatedCard>
-                ))}
-              </RelatedGrid>
-            </RelatedSection>
-          )}
           
           <BackButton to="/news-events/blog">Back to Blog</BackButton>
         </SectionContent>
@@ -320,82 +289,6 @@ const Tag = styled(Link)`
     background-color: var(--primary-color);
     color: white;
     transform: translateY(-2px);
-  }
-`;
-
-const RelatedSection = styled.div`
-  margin-top: 60px;
-  margin-bottom: 40px;
-`;
-
-const RelatedTitle = styled.h3`
-  font-size: 24px;
-  margin-bottom: 24px;
-  color: var(--text-primary);
-`;
-
-const RelatedGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const RelatedCard = styled.div`
-  background-color: var(--background-white);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const RelatedImageContainer = styled.div`
-  height: 160px;
-`;
-
-const RelatedImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const RelatedContent = styled.div`
-  padding: 16px;
-`;
-
-const RelatedDate = styled.div`
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-`;
-
-const RelatedCardTitle = styled.h4`
-  font-size: 16px;
-  margin-bottom: 8px;
-  color: var(--text-primary);
-  
-  /* Limit to 2 lines with ellipsis */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-`;
-
-const RelatedLink = styled(Link)`
-  font-size: 14px;
-  color: var(--primary-color);
-  font-weight: 500;
-  
-  &:hover {
-    text-decoration: underline;
   }
 `;
 

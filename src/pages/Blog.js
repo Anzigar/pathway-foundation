@@ -5,62 +5,39 @@ import PageBanner from "../components/ui/PageBanner";
 import CallToAction from "../components/sections/CallToAction";
 import ViewCounter from "../components/ui/ViewCounter";
 import FilterChips from "../components/FilterChips";
-import { blogService } from "../services/api";
+import { blogPosts, blogCategories } from '../data/blogPosts';
 
 /**
  * Blog - Component for displaying blog posts grouped by category
  * @returns {JSX.Element} The Blog component
  */
 const Blog = () => {
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [blogPosts, setBlogPosts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [error, setError] = useState(null);
   const [groupedBlogs, setGroupedBlogs] = useState({});
   
   // Fetch blog posts
   useEffect(() => {
-    const fetchBlogPosts = async () => {
-      try {
-        setLoading(true);
-        // If no specific categories are selected, fetch all posts
-        const categoryParam = selectedCategories.length === 0 ? null : selectedCategories[0];
-        const result = await blogService.getBlogPosts(currentPage, 12, categoryParam);
-        setBlogPosts(result.data);
-        setTotalPages(result.meta.totalPages);
-        setLoading(false);
-      } catch (err) {
-        console.error("Failed to fetch blog posts:", err);
-        setError("Failed to load blog posts. Please try again later.");
-        setLoading(false);
-      }
-    };
-    
-    fetchBlogPosts();
-  }, [currentPage, selectedCategories]);
-  
-  // Fetch categories
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const result = await blogService.getBlogCategories();
-        setCategories(result);
-      } catch (err) {
-        console.error("Failed to fetch categories:", err);
-      }
-    };
-    
-    fetchCategories();
+    // Replace API call with direct data usage
+    try {
+      setPosts(blogPosts);
+      setLoading(false);
+    } catch (err) {
+      console.error("Error loading blog posts:", err);
+      setError("Failed to load blog posts");
+      setLoading(false);
+    }
   }, []);
-  
+
   // Group blogs by category whenever blogs or selected categories change
   useEffect(() => {
     const filtered = selectedCategories.length > 0
-      ? blogPosts.filter(post => selectedCategories.includes(post.category))
-      : blogPosts;
+      ? posts.filter(post => selectedCategories.includes(post.category))
+      : posts;
       
     // Group the filtered blogs by category
     const grouped = filtered.reduce((acc, post) => {
@@ -72,7 +49,7 @@ const Blog = () => {
     }, {});
     
     setGroupedBlogs(grouped);
-  }, [blogPosts, selectedCategories]);
+  }, [posts, selectedCategories]);
 
   // Handle category toggle for the filter chips
   const handleCategoryToggle = (category) => {
@@ -97,7 +74,7 @@ const Blog = () => {
     document.getElementById("blog-section").scrollIntoView({ behavior: "smooth" });
   };
   
-  if (loading && blogPosts.length === 0) {
+  if (loading && posts.length === 0) {
     return (
       <>
         <PageBanner 
@@ -141,7 +118,7 @@ const Blog = () => {
           {/* Use FilterChips component instead of category buttons */}
           <FilterChipsWrapper>
             <FilterChips 
-              categories={categories}
+              categories={blogCategories}
               selectedCategories={selectedCategories}
               onCategoryToggle={handleCategoryToggle}
             />

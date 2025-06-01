@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Blog } from '../types/api';
-import { BlogService } from '../services/api';
 import { formatDateShort } from '../utils/dateFormatter';
 
 interface BlogsListProps {

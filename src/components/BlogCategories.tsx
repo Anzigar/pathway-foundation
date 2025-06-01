@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BlogCategory } from '../types/api';
-import { BlogCategoryService } from '../services/api';
+import { blogCategories } from '../data/blogPosts'; // Import local data instead of using service
 
 const BlogCategories: React.FC = () => {
   const [categories, setCategories] = useState<BlogCategory[]>([]);
@@ -8,26 +8,15 @@ const BlogCategories: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        setLoading(true);
-        const response = await BlogCategoryService.getAllCategories();
-        
-        if (response.status === 200) {
-          setCategories(response.data);
-          setError(null);
-        } else {
-          setError(response.message || 'Failed to load blog categories. Please try again later.');
-        }
-      } catch (err) {
-        setError('An unexpected error occurred. Please try again later.');
-        console.error('Blog categories fetch error:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
+    // Use local data instead of API call
+    try {
+      setCategories(blogCategories);
+      setLoading(false);
+    } catch (err) {
+      setError('An unexpected error occurred loading categories.');
+      setLoading(false);
+      console.error('Blog categories error:', err);
+    }
   }, []);
 
   if (loading) {

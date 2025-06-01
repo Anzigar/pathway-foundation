@@ -45,7 +45,7 @@ amplify/.config/local-*
 amplify/mock-data
 amplify/backend/amplify-meta.json
 amplify/backend/awscloudformation
-build/
+# Removed duplicate build/ entry
 aws-build/
 amplify-build/
 dist/
@@ -58,8 +58,17 @@ amplify/backend/function/*/dist/*
 # CRITICAL: DO NOT ignore these files (needed for Amplify deployments)
 !amplify/team-provider-info.json
 !src/aws-exports.js
+!.amplify/config.json
+!amplify-meta-production.json
+# Ensure Amplify cache directories are not ignored
+!.amplify/cache/
+# SSM parameter configuration for environment secrets
+!amplify/backend/function/*/parameters.json
+!amplify/backend/function/*/custom-policies.json
+!amplify/backend/backend-config.json
 
 # Build artifacts
+# Keep this single build/ entry (removed duplicate)
 build/
 *.log
 artifacts/
