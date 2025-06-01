@@ -36,6 +36,25 @@ pubsub-debug.log
 functions/.runtimeconfig.json
 functions/node_modules/
 
+# AWS Amplify
+.amplify/
+.amplify-hosting/
+amplify/\#current-cloud-backend
+amplify/.config/local-*
+amplify/mock-data
+amplify/backend/amplify-meta.json
+amplify/backend/awscloudformation
+dist/
+aws-exports.js
+awsconfiguration.json
+amplifyconfiguration.json
+amplify-build-config.json
+amplify-gradle-config.json
+amplifytools.xcconfig
+.secret-*
+**.sample
+team-provider-info.json
+
 # misc
 .DS_Store
 *.pem
@@ -63,6 +82,9 @@ firebase.json
 # Build artifacts
 build/
 *.log
+.npm/
+_logs/
+.cache-loader/
 
 # Editor specific
 .idea/
