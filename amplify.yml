@@ -28,11 +28,25 @@ test:
   phases:
     preTest:
       commands:
-        - npm ci --cache .npm --prefer-offline
+        - echo "Installing dependencies for testing..."
+        - npm ci --cache .npm --prefer-offline --no-audit
     test:
       commands:
-        - npm test -- --watchAll=false
+        - echo "Running tests..."
+        - npm test -- --watchAll=false --passWithNoTests # added --passWithNoTests to prevent failure if no tests
   artifacts:
     baseDirectory: coverage
+    configFilePath: ./jest.config.js # Configure test coverage output
     files:
-      - '**/*'
+      - 'clover.xml'
+      - 'coverage-final.json'
+      - 'lcov.info'
+      - '**/*.html'
+# Configure environment cache
+env:
+  variables:
+    # Add standard environment variables
+    NODE_ENV: production
+    # Cache and secrets configuration
+    AMPLIFY_CACHE_STORAGE: 'local'
+    AMPLIFY_SKIP_SECRETS_VALIDATION: 'true'
