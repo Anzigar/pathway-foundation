@@ -80,7 +80,7 @@ const BlogDetailPage: React.FC = () => {
                   <div className="tags-list">
                     {post.tags.map((tag, index) => (
                       <Link key={index} to={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`} className="tag">
-                        {/* {tag} */}
+                        {tag} {/* Uncommented the tag display */}
                       </Link>
                     ))}
                   </div>
