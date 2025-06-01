@@ -1,6 +1,6 @@
 # Pathway Foundation - Deployment Guide
 
-This document provides instructions for deploying the Pathway Foundation website to Firebase.
+This document provides instructions for deploying the Pathway Foundation website to Firebase and AWS Amplify.
 
 ## Prerequisites
 
@@ -47,6 +47,98 @@ This document provides instructions for deploying the Pathway Foundation website
    firebase deploy
    ```
 
+## AWS Amplify Deployment
+
+This section covers deploying the website using AWS Amplify.
+
+### Prerequisites
+
+- AWS account with appropriate permissions
+- AWS Amplify CLI installed (`npm install -g @aws-amplify/cli`)
+- Login to AWS Amplify (`amplify configure`)
+
+### Deployment Steps
+
+1. Initialize Amplify in your project (if not already done):
+   ```
+   amplify init
+   ```
+
+2. Add hosting:
+   ```
+   amplify add hosting
+   ```
+
+3. Deploy to Amplify:
+   ```
+   amplify publish
+   ```
+
+### Connecting to GitHub Repository
+
+1. Go to AWS Amplify Console
+2. Click "Connect app"
+3. Select GitHub as repository source
+4. Authenticate and select your repository
+5. Configure build settings
+6. Deploy
+
+### Troubleshooting Amplify Builds
+
+#### Package Installation Issues
+
+If encountering npm cache misses or package installation errors:
+
+1. Ensure `package-lock.json` is committed to your repository
+2. Add the following to your build settings in Amplify Console:
+
+   ```yaml
+   version: 1
+   frontend:
+     phases:
+       preBuild:
+         commands:
+           - npm ci --no-audit
+       build:
+         commands:
+           - npm run build
+     artifacts:
+       baseDirectory: build
+       files:
+         - '**/*'
+     cache:
+       paths:
+         - node_modules/**/*
+         - .npm/**/*
+   ```
+
+#### SSM Secrets Setup
+
+To fix SSM secrets setup failures:
+
+1. In AWS Console, go to Systems Manager > Parameter Store
+2. Create parameters using path format: `/amplify/{appId}/{branchName}/{parameterName}`
+3. Set permissions for Amplify service role to access these parameters
+
+#### Backend Environment Association
+
+If you don't need a backend environment:
+
+1. In Amplify Console, go to App settings > Build settings
+2. Edit your build specification to include:
+
+   ```yaml
+   backend:
+     phases:
+      build:
+        commands:
+          - echo "No backend required"
+   ```
+
+3. Alternatively, disable the backend build completely in App settings
+
+For more details, refer to the [AWS Amplify Documentation](https://docs.aws.amazon.com/amplify/).
+
 ## Troubleshooting
 
 If you encounter issues during deployment:
@@ -67,21 +159,3 @@ If you encounter issues during deployment:
    ```
    firebase login:ci
    ```
-
-## Post-Deployment Verification
-
-After deployment is complete, verify your changes by:
-
-1. Visiting your Firebase hosting URL
-2. Testing the website functionality on different devices and browsers
-3. Checking that all updated content is displayed correctly
-
-## Rollback
-
-If needed, you can rollback to a previous deployment:
-
-```
-firebase hosting:clone SITE_ID:PREVIOUS_DEPLOY_ID SITE_ID:live
-```
-
-You can find previous deploy IDs in the Firebase Console under Hosting > Deployment History.
