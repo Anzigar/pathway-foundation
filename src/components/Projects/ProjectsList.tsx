@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import './ProjectsList.css'; // Import the CSS file
 
 // Define the Project type
 interface Project {
@@ -22,31 +24,24 @@ const ProjectsList: React.FC = () => {
       setCurrentProjects([
         {
           title: 'Empowering Youth Through Football',
-          summary: 'Using sports as a tool for youth leadership development and community building.',
-          image: '/images/football-project.jpg',
+          summary: 'This initiative uses football as a transformative tool to promote child rights, gender equality, school engagement, and environmental stewardship. The project aims to improve school attendance and learning outcomes, foster inclusive participation regardless of gender, and enhance children\'s physical and mental well-being. Core activities include football training at Bunju A and B Primary Schools, safe spaces for dialogue, community sensitization events, and the distribution of sports equipment.',
+          image: '/images/supplying_jerseys/football.jpg',
           slug: 'empowering-youth-through-football',
-          status: 'Current'
-        },
-        {
-          title: 'Empowering Adolescent Girls Through Menstrual Justice',
-          summary: 'Addressing period poverty and promoting menstrual health education for adolescent girls.',
-          image: '/images/menstrual-justice.jpg',
-          slug: 'empowering-adolescent-girls-through-menstrual-justice',
           status: 'Current'
         }
       ]);
       setPastProjects([
         {
           title: 'Bodaboda Youth Empowerment Project (BOYEP)',
-          summary: 'Creating sustainable livelihoods for young motorcycle taxi operators through skills development and financial literacy.',
-          image: '/images/bodaboda-project.jpg',
+          summary: 'The Bodaboda Youth Empowerment Project (BOYEP) aimed to empower Bodaboda youth by strengthening their leadership, advocacy, and financial management skills. Through a Community-Based Trainer (CBT) model, the project is expected to train over 1,000 individuals\' beneficiaries. Furthermore, in completion of this project PFP should have achieved the formation and registration of at least 5 Motorcycle (Bodaboda) associations, to enable access to low-interest loans and group economic investments such as motorcycle purchases.',
+          image: '/images/boeyp.jpg',
           slug: 'bodaboda-youth-empowerment-project',
           status: 'Past'
         },
         {
           title: 'Mtambani Water, Sanitation and Hygiene Project',
-          summary: 'Improving access to clean water and sanitation facilities in rural communities.',
-          image: '/images/mtambani-wash.jpg',
+          summary: 'The Mtambani WASH Project aims to improve hygiene and sanitation conditions in marginalized primary schools, with a special focus on addressing waterborne diseases and supporting girls\' menstrual hygiene. Key interventions include constructing pit latrines, installing water systems, and training stakeholders in hygiene practices. School Health Clubs will be established, and local women will be trained in making sanitary pads - providing both empowerment and economic opportunity.',
+          image: '/images/mtambani_project.jpg',
           slug: 'mtambani-water-sanitation-hygiene-project',
           status: 'Past'
         }
@@ -74,9 +69,9 @@ const ProjectsList: React.FC = () => {
                 <div className="project-content">
                   <h3 className="project-title">{project.title}</h3>
                   <p className="project-summary">{project.summary}</p>
-                  <a href={`/projects/${project.slug}`} className="project-link">
+                  <Link to={`/projects/${project.status.toLowerCase()}/${project.slug}`} className="project-link">
                     Learn More
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -103,9 +98,9 @@ const ProjectsList: React.FC = () => {
                 <div className="project-content">
                   <h3 className="project-title">{project.title}</h3>
                   <p className="project-summary">{project.summary}</p>
-                  <a href={`/projects/${project.slug}`} className="project-link">
+                  <Link to={`/projects/${project.status.toLowerCase()}/${project.slug}`} className="project-link">
                     Learn More
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}

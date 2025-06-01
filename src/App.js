@@ -27,6 +27,9 @@ import Testimonials from "./pages/Testimonials";
 import MediaResources from "./pages/MediaResources";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
+import ProjectDetail from "./components/Projects/ProjectDetail";
+import BlogPage from "./pages/BlogPage";
+import BlogDetailPage from "./pages/BlogDetailPage";
 
 function App() {
   return (
@@ -43,7 +46,7 @@ function App() {
           <Route path="/projects/current" element={<CurrentProjects />} />
           <Route path="/projects/past" element={<PastProjects />} />
           <Route path="/news-events" element={<NewsEvents />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog" element={<BlogPage />} />
           <Route path="/news-events/blog/:slug" element={<BlogDetail />} />
           <Route path="/news-events/announcements" element={<Announcements />} />
           <Route path="/news-events/gallery" element={<Gallery />} />
@@ -54,6 +57,9 @@ function App() {
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/media-resources" element={<MediaResources />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/projects/:status/:slug" element={<ProjectDetail />} />
+          <Route path="/blog/category/:categorySlug" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogDetailPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

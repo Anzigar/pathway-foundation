@@ -1,0 +1,227 @@
+.blog-detail-page {
+  background-color: transparent;
+}
+
+.blog-detail-page .page-header {
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding-top: 60px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.blog-detail-page .page-header h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text-primary) !important;
+  max-width: 800px;
+  margin: 0 auto 16px;
+  line-height: 1.2;
+}
+
+.blog-detail-page .page-header p {
+  font-size: 1.25rem;
+  color: var(--text-secondary) !important;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.blog-article {
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 50px;
+}
+
+.featured-image {
+  margin: 0 0 32px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.featured-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+/* Chip styling using website colors */
+.category-link {
+  display: inline-block;
+  padding: 6px 14px;
+  background-color: rgba(6, 104, 225, 0.1);
+  color: var(--primary-color);
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.category-link:hover {
+  background-color: rgba(6, 104, 225, 0.15);
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.meta-label {
+  display: none; /* Hide labels for cleaner UI */
+}
+
+.meta-value {
+  color: var(--text-secondary);
+}
+
+.blog-introduction {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #111827;
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+
+.blog-introduction p {
+  margin-bottom: 0;
+}
+
+.blog-content {
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+/* Blog tags as chips */
+.blog-tags {
+  margin: 40px 0;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.875rem;
+  background-color: rgba(6, 104, 225, 0.1);
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.tag:hover {
+  background-color: rgba(6, 104, 225, 0.15);
+}
+
+/* Widget styling */
+.widget-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #111827;
+  background: transparent;
+  padding: 0;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
+}
+
+.sidebar-widget {
+  background-color: transparent;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Categories list styling */
+.categories-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.categories-list li {
+  margin: 0;
+}
+
+.categories-list li a {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.875rem;
+  background-color: rgba(107, 114, 128, 0.1);
+  color: #4b5563;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.categories-list li.active a {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.categories-list li a:hover {
+  background-color: rgba(107, 114, 128, 0.2);
+}
+
+/* Clean up related posts */
+.related-post-link {
+  display: flex;
+  text-decoration: none;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: transparent;
+  padding: 8px;
+  transition: all 0.2s ease;
+}
+
+.related-post-link:hover {
+  background-color: #f9fafb;
+}
+
+.related-post-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-right: 15px;
+}
+
+/* Clean up CTA widget */
+.cta-widget {
+  text-align: center;
+  background-color: #f9fafb;
+  border: none;
+}
+
+.blog-navigation {
+  margin: 40px 0;
+}
+
+.blog-navigation .btn {
+  border-radius: 30px;
+}

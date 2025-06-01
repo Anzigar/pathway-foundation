@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 node_modules/
+.yarn/
 **/node_modules
 /.pnp
 .pnp.*
@@ -12,6 +13,7 @@ node_modules/
 !.yarn/releases
 !.yarn/versions
 
+
 # testing
 /coverage
 
@@ -19,8 +21,20 @@ node_modules/
 /.next/
 /out/
 
-# production
+#firebase
+/firebase-debug.log
+.firebase/
 /build
+firebase-debug.*.log
+firebase-export-*
+.runtimeconfig.json
+*-firebase-adminsdk-*.json
+ui-debug.log
+database-debug.log
+firestore-debug.log
+pubsub-debug.log
+functions/.runtimeconfig.json
+functions/node_modules/
 
 # misc
 .DS_Store
@@ -53,6 +67,11 @@ build/
 # Editor specific
 .idea/
 .vscode/
+*.sublime-*
+.atom/
+.nova/
+*.swp
+*.swo
 
 # Environment variables
 .env
@@ -65,7 +84,22 @@ build/
 .cache/
 .parcel-cache/
 *.pack
+.eslintcache
+.stylelintcache
+.npm/
 
 # Scripts
 setup.sh
 node_modules/
+
+# Temporary files
+*.tmp
+*~
+*.bak
+.temp/
+tmp/
+
+# OS specific
+Thumbs.db
+ehthumbs.db
+desktop.ini

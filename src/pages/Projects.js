@@ -25,18 +25,22 @@ const ProjectsNav = styled.div`
 `;
 
 const NavButton = styled(Link)`
-  padding: 12px 24px;
+  padding: 14px 28px;
   border: 2px solid ${props => props.active ? 'var(--primary-color)' : 'var(--border-color)'};
-  border-radius: 30px;
+  border-radius: 50px;
   background-color: ${props => props.active ? 'var(--primary-color)' : 'transparent'};
   color: ${props => props.active ? 'white' : 'var(--text-primary)'};
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
   transition: all 0.3s ease;
   
   &:hover {
     border-color: var(--primary-color);
     background-color: ${props => props.active ? 'var(--primary-color)' : 'rgba(6, 104, 225, 0.05)'};
     color: ${props => props.active ? 'white' : 'var(--primary-color)'};
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -56,12 +60,16 @@ const ProjectsGrid = styled.div`
 
 const FilterContainer = styled.div`
   margin-bottom: 40px;
+  background-color: #f9f9fb;
+  padding: 24px;
+  border-radius: 16px;
 `;
 
 const FilterTitle = styled.h3`
-  font-size: 18px;
-  margin-bottom: 16px;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
   color: var(--text-primary);
+  font-weight: 600;
 `;
 
 const FilterOptions = styled.div`
@@ -71,37 +79,105 @@ const FilterOptions = styled.div`
 `;
 
 const FilterButton = styled.button`
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: 1px solid ${props => props.active ? 'var(--primary-color)' : 'var(--border-color)'};
-  border-radius: 20px;
+  border-radius: 50px;
   background-color: ${props => props.active ? 'rgba(6, 104, 225, 0.1)' : 'transparent'};
   color: ${props => props.active ? 'var(--primary-color)' : 'var(--text-secondary)'};
-  font-size: 14px;
+  font-size: 0.95rem;
+  font-weight: ${props => props.active ? '600' : '500'};
   cursor: pointer;
   transition: all 0.3s ease;
   
   &:hover {
     border-color: var(--primary-color);
     color: var(--primary-color);
+    transform: translateY(-2px);
   }
 `;
 
 const NoResults = styled.div`
   text-align: center;
-  padding: 60px 0;
+  padding: 60px 40px;
   color: var(--text-secondary);
+  background-color: #f9f9fb;
+  border-radius: 16px;
+  margin-top: 40px;
   
   h3 {
-    font-size: 24px;
+    font-size: 1.5rem;
     margin-bottom: 16px;
     color: var(--text-primary);
+    font-weight: 700;
   }
   
   p {
-    font-size: 16px;
+    font-size: 1.05rem;
     max-width: 500px;
     margin: 0 auto;
     line-height: 1.6;
+  }
+`;
+
+const StyledCard = styled(Card)`
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  }
+  
+  img {
+    border-radius: 0;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+  
+  .card-body {
+    padding: 24px;
+  }
+  
+  h5 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  
+  p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  
+  a {
+    display: inline-block;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(6, 104, 225, 0.2);
+  }
+  
+  a:hover {
+    background-color: #0559c9;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(6, 104, 225, 0.25);
   }
 `;
 
@@ -111,7 +187,7 @@ const Projects = () => {
     {
       id: 1,
       title: "Empowering Youth Through Football",
-      description: "Using football as a tool for youth development, leadership training, and community building in vulnerable areas.",
+      description: "This initiative uses football as a transformative tool to promote child rights, gender equality, school engagement, and environmental stewardship. The project aims to improve school attendance and learning outcomes, foster inclusive participation regardless of gender, and enhance children's physical and mental well-being.",
       image: "/images/supplying_jerseys/football.jpg",
       link: "/projects/current/empowering-youth-through-football",
       imageAlt: "Youth playing football",
@@ -119,64 +195,32 @@ const Projects = () => {
       category: "youth-development"
     },
     {
-      id: 2,
-      title: "Menstrual Justice Initiative",
-      description: "Breaking the stigma around menstruation and providing menstrual products to school girls to reduce absenteeism.",
-      image: "/images/menstrual.jpg",
-      link: "/projects/current/menstrual-justice",
-      imageAlt: "Girls in a classroom",
-      status: "current",
-      category: "gender-equality"
-    },
-    {
-      id: 3,
-      title: "Community Climate Resilience",
-      description: "Building climate resilience through community-based adaptation strategies and sustainable practices.",
-      image: "/images/climate_resilience.jpg",
-      link: "/projects/current/climate-resilience",
-      imageAlt: "Community garden project",
-      status: "current",
-      category: "climate-resilience"
-    },
-    {
       id: 4,
-      title: "BOYEP",
-      description: "Building Opportunities for Youth Economic Participation program that helped young people develop vocational skills.",
+      title: "Bodaboda Youth Empowerment Project (BOYEP)",
+      description: "The Bodaboda Youth Empowerment Project (BOYEP) aimed to empower Bodaboda youth by strengthening their leadership, advocacy, and financial management skills. Through a Community-Based Trainer (CBT) model, the project trained over 1,000 individuals.",
       image: "/images/boeyp.jpg",
-      link: "/projects/past/boyep",
+      link: "/projects/past/bodaboda-youth-empowerment-project",
       imageAlt: "Youth in vocational training workshop",
       status: "past",
       category: "economic-empowerment"
     },
     {
       id: 5,
-      title: "Mtambani WASH",
-      description: "Water, Sanitation and Hygiene initiative that provided clean water access to over 5,000 residents.",
+      title: "Mtambani Water, Sanitation and Hygiene Project",
+      description: "The Mtambani WASH Project aims to improve hygiene and sanitation conditions in marginalized primary schools, with a special focus on addressing waterborne diseases and supporting girls' menstrual hygiene.",
       image: "/images/mtambani_project.jpg",
-      link: "/projects/past/mtambani-wash",
+      link: "/projects/past/mtambani-water-sanitation-hygiene-project",
       imageAlt: "Clean water access point in Mtambani",
       status: "past",
       category: "wash-health"
-    },
-    {
-      id: 6,
-      title: "Women's Microenterprise Network",
-      description: "Supporting women entrepreneurs through business training, microloans, and market access.",
-      image: "/images/women.JPG",
-      link: "/projects/past/women-microenterprise",
-      imageAlt: "Women entrepreneurs displaying products",
-      status: "past",
-      category: "economic-empowerment"
     }
   ];
 
   const categories = [
     { id: "all", name: "All Categories" },
     { id: "economic-empowerment", name: "Economic Empowerment" },
-    { id: "gender-equality", name: "Gender Equality" },
     { id: "youth-development", name: "Youth Development" },
-    { id: "wash-health", name: "WASH & Health" },
-    { id: "climate-resilience", name: "Climate Resilience" }
+    { id: "wash-health", name: "WASH & Health" }
   ];
 
   const [activeStatus, setActiveStatus] = useState("all");
@@ -239,7 +283,7 @@ const Projects = () => {
           {filteredProjects.length > 0 ? (
             <ProjectsGrid>
               {filteredProjects.map(project => (
-                <Card 
+                <StyledCard 
                   key={project.id}
                   title={project.title}
                   description={project.description}
