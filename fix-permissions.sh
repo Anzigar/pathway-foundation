@@ -17,5 +17,17 @@ if [ -f "node_modules/.cache/.eslintcache" ]; then
     sudo chmod 644 node_modules/.cache/.eslintcache
 fi
 
+# Fix ESLint cache permissions
+echo "Fixing ESLint cache permissions..."
+rm -rf ./node_modules/.cache/.eslintcache
+mkdir -p ./node_modules/.cache
+touch ./node_modules/.cache/.eslintcache
+chmod 666 ./node_modules/.cache/.eslintcache
+
+# Also create a local npm cache with proper permissions
+echo "Setting up local npm cache..."
+mkdir -p ./.npm-cache
+chmod -R 777 ./.npm-cache
+
 echo "✅ Permissions fixed successfully!"
 echo "You can now run 'npm start' or 'npm run build' again."

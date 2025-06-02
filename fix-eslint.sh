@@ -1,17 +1,17 @@
 #!/bin/bash
-# Simple script to fix ESLint cache permission issues
 
-echo "Fixing ESLint cache permissions..."
+echo "Fixing ESLint cache permission issues..."
 
-# Make sure we're in the project directory
-cd "$(dirname "$0")"
+# 1. Remove the eslint cache directory
+rm -rf ./node_modules/.cache/.eslintcache
 
-# Remove the problematic cache directory completely
-rm -rf node_modules/.cache
+# 2. Create a new cache directory with proper permissions
+mkdir -p ./node_modules/.cache
+chmod -R 777 ./node_modules/.cache
 
-# Create the directory again with permissive permissions
-mkdir -p node_modules/.cache
-chmod 777 node_modules/.cache
+# 3. Touch the eslint cache file with wide permissions
+touch ./node_modules/.cache/.eslintcache
+chmod 666 ./node_modules/.cache/.eslintcache
 
-echo "ESLint cache directory recreated with proper permissions."
-echo "Try running your build command again."
+echo "ESLint cache permissions fixed. Run this script again if issues persist."
+echo "To use this script: bash fix-eslint.sh"

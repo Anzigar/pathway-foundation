@@ -15,8 +15,8 @@ import Projects from "./pages/Projects";
 import CurrentProjects from "./pages/CurrentProjects";
 import PastProjects from "./pages/PastProjects";
 import NewsEvents from "./pages/NewsEvents";
-import Blog from "./pages/Blog";
-import BlogDetail from "./pages/BlogDetail";
+import BlogPage from "./pages/BlogPage";
+import BlogDetailPage from "./pages/BlogDetailPage";
 import Announcements from "./pages/Announcements";
 import Gallery from "./pages/Gallery";
 import OurImpact from "./pages/OurImpact";
@@ -28,8 +28,6 @@ import MediaResources from "./pages/MediaResources";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import ProjectDetail from "./components/Projects/ProjectDetail";
-import BlogPage from "./pages/BlogPage";
-import BlogDetailPage from "./pages/BlogDetailPage";
 
 function App() {
   return (
@@ -47,7 +45,6 @@ function App() {
           <Route path="/projects/past" element={<PastProjects />} />
           <Route path="/news-events" element={<NewsEvents />} />
           <Route path="/blog" element={<BlogPage />} />
-          <Route path="/news-events/blog/:slug" element={<BlogDetail />} />
           <Route path="/news-events/announcements" element={<Announcements />} />
           <Route path="/news-events/gallery" element={<Gallery />} />
           <Route path="/our-impact" element={<OurImpact />} />

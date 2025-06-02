@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import PageHeader from '../components/shared/PageHeader';
 import BlogsList from '../components/BlogsList';
 import BlogCategories from '../components/BlogCategories';
-import { BlogCategoryService } from '../services/api';
+import { blogCategories } from '../data/blogPosts'; // Import local data instead
 import LoadingSpinner from '../components/shared/LoadingSpinner';
 import ErrorMessage from '../components/shared/ErrorMessage';
 import { BlogCategory } from '../types/api';
@@ -15,31 +15,21 @@ const BlogsPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchCategory = async () => {
-      if (!categorySlug) return;
-      
+    // Use local data instead of API call
+    if (categorySlug) {
       try {
         setLoading(true);
-        const response = await BlogCategoryService.getAllCategories();
-        
-        if (response.status === 200) {
-          const foundCategory = response.data.find(cat => cat.slug === categorySlug);
-          if (foundCategory) {
-            setCategory(foundCategory);
-          }
-          setError(null);
-        } else {
-          setError(response.message || 'Failed to load category. Please try again later.');
+        const foundCategory = blogCategories.find(cat => cat.slug === categorySlug);
+        if (foundCategory) {
+          setCategory(foundCategory);
         }
-      } catch (err) {
-        setError('An unexpected error occurred. Please try again later.');
-        console.error('Category fetch error:', err);
-      } finally {
         setLoading(false);
+      } catch (err) {
+        setError('An unexpected error occurred loading category.');
+        setLoading(false);
+        console.error('Category error:', err);
       }
-    };
-
-    fetchCategory();
+    }
   }, [categorySlug]);
 
   const pageTitle = category ? `${category.name} Blogs` : 'Blog';
