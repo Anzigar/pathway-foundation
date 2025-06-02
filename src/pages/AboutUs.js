@@ -1,364 +1,287 @@
 import React from "react";
 import styled from "styled-components";
-import PageBanner from "../components/ui/PageBanner";
-import CallToAction from "../components/sections/CallToAction";
-import { FaUsers, FaHandsHelping, FaGlobeAfrica, FaGraduationCap, FaHeartbeat, FaLeaf } from "react-icons/fa";
+import { motion } from "framer-motion";
 
-const AboutSection = styled.section`
-  padding: 80px 0;
-  background-color: var(--background-white);
-`;
+// Import components as needed
+// import PageHeader from "../components/common/PageHeader";
 
-const SectionContent = styled.div`
+const AboutContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 2rem 1rem 5rem;
 `;
-
-const TwoColumn = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-`;
-
-const ColumnContent = styled.div``;
 
 const SectionTitle = styled.h2`
-  font-size: 36px;
-  color: var(--text-primary);
-  margin-bottom: 24px;
-`;
-
-const SectionText = styled.p`
-  font-size: 18px;
-  color: var(--text-secondary);
-  margin-bottom: 24px;
-  line-height: 1.6;
-`;
-
-const MissionVisionSection = styled.section`
-  padding: 80px 0;
-  background-color: var(--background-light);
-`;
-
-const MissionVisionContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  font-size: 2.2rem;
+  color: ${props => props.theme?.colors?.primary || "#087FAE"};
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
   
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background-color: ${props => props.theme?.colors?.secondary || "#EFB000"};
   }
 `;
 
-const MissionVisionCard = styled.div`
-  background-color: var(--background-white);
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+const SubTitle = styled.h3`
+  font-size: 1.6rem;
+  color: ${props => props.theme?.colors?.primary || "#087FAE"};
+  margin-bottom: 1.2rem;
+  margin-top: 3rem;
 `;
 
-const MVTitle = styled.h3`
-  font-size: 24px;
-  color: var(--text-primary);
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid var(--primary-color);
-`;
-
-const MVText = styled.p`
-  font-size: 18px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-`;
-
-const ValuesSection = styled.section`
-  padding: 80px 0;
-  background-color: var(--background-white);
+const Paragraph = styled.p`
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: #444;
 `;
 
 const ValuesContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
 `;
 
-const ValueCard = styled.div`
-  padding: 30px;
-  border-radius: 12px;
-  background-color: var(--background-light);
-  transition: transform 0.3s ease;
+const ValueCard = styled(motion.div)`
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-top: 4px solid ${props => props.theme?.colors?.primary || "#087FAE"};
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   
   &:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
   }
 `;
 
-const ValueTitle = styled.h3`
-  font-size: 20px;
-  color: var(--text-primary);
-  margin: 16px 0;
+const ValueTitle = styled.h4`
+  font-size: 1.2rem;
+  color: ${props => props.theme?.colors?.primary || "#087FAE"};
+  margin-bottom: 0.8rem;
 `;
 
-const ValueIcon = styled.div`
-  font-size: 36px;
-  color: var(--primary-color);
-`;
-
-const ThematicAreasSection = styled.section`
-  padding: 80px 0;
-  background-color: var(--background-light);
-`;
-
-const AreasContainer = styled.div`
+const ThematicAreasContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
 `;
 
-const AreaCard = styled.div`
-  background-color: var(--background-white);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
+const ThematicAreaCard = styled(motion.div)`
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid ${props => props.theme?.colors?.secondary || "#EFB000"};
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   
   &:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
   }
 `;
 
-const AreaIcon = styled.div`
-  background-color: var(--primary-color);
-  color: white;
-  font-size: 36px;
-  padding: 30px;
-  text-align: center;
-`;
-
-const AreaContent = styled.div`
-  padding: 30px;
-`;
-
-const AreaTitle = styled.h3`
-  font-size: 20px;
-  color: var(--text-primary);
-  margin-bottom: 16px;
-`;
-
-const AreaText = styled.p`
-  font-size: 16px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-`;
-
-const TeamSection = styled.section`
-  padding: 80px 0;
-  background-color: var(--background-white);
-`;
-
-const AboutImage = styled.img`
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+const ThematicAreaTitle = styled.h4`
+  font-size: 1.2rem;
+  color: ${props => props.theme?.colors?.secondary || "#EFB000"};
+  margin-bottom: 0.8rem;
 `;
 
 const AboutUs = () => {
-  const values = [
-    {
-      id: 1,
-      title: "Integrity",
-      description: "We uphold the highest standards of integrity in all our actions and decisions.",
-      icon: <FaUsers />
-    },
-    {
-      id: 2,
-      title: "Community-Led",
-      description: "We believe in empowering communities to lead their own development.",
-      icon: <FaHandsHelping />
-    },
-    {
-      id: 3,
-      title: "Transparency",
-      description: "We maintain transparency in all our operations and financial management.",
-      icon: <FaGlobeAfrica />
-    },
-    {
-      id: 4,
-      title: "Innovation",
-      description: "We embrace innovative approaches to tackle complex social challenges.",
-      icon: <FaGraduationCap />
-    },
-    {
-      id: 5,
-      title: "Compassion",
-      description: "We act with compassion and empathy toward the communities we serve.",
-      icon: <FaHeartbeat />
-    },
-    {
-      id: 6,
-      title: "Sustainability",
-      description: "We develop solutions that are environmentally and socially sustainable.",
-      icon: <FaLeaf />
-    },
-  ];
-
-  const thematicAreas = [
-    {
-      id: 1,
-      title: "Livelihoods & Economic Empowerment",
-      description: "Supporting sustainable livelihoods through skills development, financial inclusion, and entrepreneurship.",
-      icon: <FaHandsHelping />
-    },
-    {
-      id: 2,
-      title: "Gender Equality & Social Inclusion",
-      description: "Promoting gender equality and inclusive participation in all aspects of society.",
-      icon: <FaUsers />
-    },
-    {
-      id: 3,
-      title: "Youth Development & Leadership",
-      description: "Empowering young people with skills, mentorship, and opportunities for leadership.",
-      icon: <FaGraduationCap />
-    },
-    {
-      id: 4,
-      title: "WASH & Health",
-      description: "Improving access to clean water, sanitation, and essential health services.",
-      icon: <FaHeartbeat />
-    },
-    {
-      id: 5,
-      title: "Climate Resilience & Innovation",
-      description: "Building community resilience through climate-smart innovations and practices.",
-      icon: <FaLeaf />
-    },
-    {
-      id: 6,
-      title: "Emergency Response",
-      description: "Providing timely humanitarian assistance during emergencies and disasters.",
-      icon: <FaGlobeAfrica />
-    }
-  ];
-
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+  
   return (
-    <>
-      <PageBanner 
-        title="About Us" 
-        subtitle="Learn more about our mission, vision, and the impact we're making in vulnerable communities" 
-      />
+    <div>
+      {/* PageHeader if exists */}
       
-      <AboutSection>
-        <SectionContent>
-          <TwoColumn>
-            <ColumnContent>
-              <SectionTitle>Our Story</SectionTitle>
-              <SectionText>
-                Founded in 2016, Pathway Foundation emerged from a vision to address the pressing needs of vulnerable communities in Tanzania. What began as a small initiative to support youth education has grown into a comprehensive organization working across multiple thematic areas.
-              </SectionText>
-              <SectionText>
-                Over the years, we have established strong partnerships with local communities, government agencies, and international organizations to implement sustainable and impactful programs that address root causes of vulnerability and create pathways to resilience.
-              </SectionText>
-            </ColumnContent>
-            <ColumnContent>
-              <AboutImage 
-                src="/images/about/about.jpg" // Replace with your image path or URL
-                alt="Pathway Foundation team working with communities"
-              />
-            </ColumnContent>
-          </TwoColumn>
-        </SectionContent>
-      </AboutSection>
-      
-      <MissionVisionSection>
-        <SectionContent>
-          <SectionTitle style={{ textAlign: "center", marginBottom: "60px" }}>Mission & Vision</SectionTitle>
-          <MissionVisionContainer>
-            <MissionVisionCard>
-              <MVTitle>Our Mission</MVTitle>
-              <MVText>
-                To empower vulnerable communities through sustainable, community-led initiatives that foster economic resilience, social inclusion, and environmental stewardship.
-              </MVText>
-            </MissionVisionCard>
-            <MissionVisionCard>
-              <MVTitle>Our Vision</MVTitle>
-              <MVText>
-                A world where every community has the resources, knowledge, and opportunities to thrive, regardless of their circumstances.
-              </MVText>
-            </MissionVisionCard>
-          </MissionVisionContainer>
-        </SectionContent>
-      </MissionVisionSection>
-      
-      <ValuesSection>
-        <SectionContent>
-          <SectionTitle style={{ textAlign: "center", marginBottom: "60px" }}>Our Core Values</SectionTitle>
-          <ValuesContainer>
-            {values.map(value => (
-              <ValueCard key={value.id}>
-                <ValueIcon>{value.icon}</ValueIcon>
-                <ValueTitle>{value.title}</ValueTitle>
-                <MVText>{value.description}</MVText>
-              </ValueCard>
-            ))}
-          </ValuesContainer>
-        </SectionContent>
-      </ValuesSection>
-      
-      <ThematicAreasSection>
-        <SectionContent>
-          <SectionTitle style={{ textAlign: "center", marginBottom: "60px" }}>Thematic Areas</SectionTitle>
-          <AreasContainer>
-            {thematicAreas.map(area => (
-              <AreaCard key={area.id}>
-                <AreaIcon>{area.icon}</AreaIcon>
-                <AreaContent>
-                  <AreaTitle>{area.title}</AreaTitle>
-                  <AreaText>{area.description}</AreaText>
-                </AreaContent>
-              </AreaCard>
-            ))}
-          </AreasContainer>
-        </SectionContent>
-      </ThematicAreasSection>
-      
-      <TeamSection>
-        <SectionContent>
-          <SectionTitle style={{ textAlign: "center", marginBottom: "60px" }}>Our Team</SectionTitle>
-          {/* Team members will be added here */}
-          <SectionText style={{ textAlign: "center" }}>
-            Meet the dedicated individuals behind Pathway Foundation who work tirelessly to create positive change in vulnerable communities.
-          </SectionText>
-        </SectionContent>
-      </TeamSection>
-      
-      <CallToAction />
-    </>
+      <AboutContainer>
+        <SectionTitle>About Pathways Foundation for the Poor</SectionTitle>
+        
+        <SubTitle>Our Story</SubTitle>
+        <Paragraph>
+          Pathways Foundation for the Poor (PFP) began its journey in East Africa, with Tanzania as its operational base. 
+          Registered as a Non-Governmental Organization (NGO) in 2006, PFP has implemented community-driven programs across 
+          various zones in Tanzania:
+        </Paragraph>
+        <ul>
+          <li>Coastal Zone: Dar es Salaam and Pwani</li>
+          <li>Eastern Zone: Morogoro and Tanga</li>
+          <li>Central Zone: Dodoma and Singida</li>
+          <li>Western Zone: Tabora, Kigoma, Rukwa, and Katavi</li>
+        </ul>
+        <Paragraph>
+          Our work spans youth empowerment, gender equality, livelihoods, WASH, and climate resilience, reaching thousands 
+          of marginalized individuals, particularly women and girls. In 2024, PFP was officially registered in the United 
+          States of America, with its headquarters in Texas, to expand our global presence and strengthen our fundraising 
+          and strategic partnerships. This new registration enhances our ability to mobilize resources, engage with international 
+          donors, and promote global solidarity for our mission to uplift vulnerable communities. With operations rooted in 
+          Tanzania and a growing international platform, PFP remains committed to local impact with global collaboration.
+        </Paragraph>
+        
+        <SubTitle>Our Mission</SubTitle>
+        <Paragraph>
+          To uplift the lives of impoverished and vulnerable communities by tackling the root causes of poverty, 
+          boosting household incomes, and promoting overall social well-being.
+        </Paragraph>
+        
+        <SubTitle>Our Vision</SubTitle>
+        <Paragraph>
+          A society where every individual, irrespective of gender, realizes their full potential, coexists peacefully, 
+          and thrives, leading to the eradication of extreme poverty and the enhancement of social well-being.
+        </Paragraph>
+        
+        <SubTitle>Our Core Values</SubTitle>
+        <ValuesContainer>
+          <ValueCard 
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <ValueTitle>Social inclusion</ValueTitle>
+            <p>We believe in involving communities to lead their own development.</p>
+          </ValueCard>
+          
+          <ValueCard 
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <ValueTitle>Empowerment</ValueTitle>
+            <p>We offer support initiatives led by youth, women and special groups.</p>
+          </ValueCard>
+          
+          <ValueCard 
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <ValueTitle>Transparency</ValueTitle>
+            <p>We maintain transparency in all our operations and financial management.</p>
+          </ValueCard>
+          
+          <ValueCard 
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <ValueTitle>Innovation</ValueTitle>
+            <p>We embrace innovative approaches to tackle complex social challenges.</p>
+          </ValueCard>
+          
+          <ValueCard 
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <ValueTitle>Sustainability</ValueTitle>
+            <p>We develop solutions that are environmentally and socially sustainable.</p>
+          </ValueCard>
+          
+          <ValueCard 
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            <ValueTitle>Integrity</ValueTitle>
+            <p>We uphold the highest standards of integrity in all our actions and decisions.</p>
+          </ValueCard>
+        </ValuesContainer>
+        
+        <SubTitle>Thematic Areas</SubTitle>
+        <ThematicAreasContainer>
+          <ThematicAreaCard
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <ThematicAreaTitle>Livelihoods & Economic Empowerment</ThematicAreaTitle>
+            <p>Supporting communities to develop sustainable livelihoods and economic opportunities.</p>
+          </ThematicAreaCard>
+          
+          <ThematicAreaCard
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <ThematicAreaTitle>Gender Equality & Social Inclusion</ThematicAreaTitle>
+            <p>Promoting equality, dignity, and opportunity for all community members regardless of gender.</p>
+          </ThematicAreaCard>
+          
+          <ThematicAreaCard
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <ThematicAreaTitle>Youth Development & Leadership</ThematicAreaTitle>
+            <p>Empowering young people with skills, knowledge and opportunities to lead change.</p>
+          </ThematicAreaCard>
+          
+          <ThematicAreaCard
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <ThematicAreaTitle>WASH & Health in Communities and Schools</ThematicAreaTitle>
+            <p>Improving access to clean water, sanitation facilities, and health education.</p>
+          </ThematicAreaCard>
+          
+          <ThematicAreaCard
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <ThematicAreaTitle>Climate Resilience & Innovation</ThematicAreaTitle>
+            <p>Building community resilience to climate change through innovative approaches.</p>
+          </ThematicAreaCard>
+          
+          <ThematicAreaCard
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            <ThematicAreaTitle>Emergency Response & Resilience Building</ThematicAreaTitle>
+            <p>Supporting communities during emergencies while building long-term resilience.</p>
+          </ThematicAreaCard>
+        </ThematicAreasContainer>
+      </AboutContainer>
+    </div>
   );
 };
 

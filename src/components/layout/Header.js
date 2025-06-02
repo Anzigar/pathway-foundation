@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { ReactComponent as LogoSVG } from "../../assets/logo.svg";
+import { ReactComponent as LogoSVG } from "../../assets/logo2.svg";
 
 // Animation for logo entrance
 const logoEntrance = keyframes`
@@ -76,7 +76,7 @@ const Logo = styled(Link)`
 
   /* Fallback for img tag if SVG doesn't render */
   img {
-    height: 90px; /* Increased from 85px */
+    height: 120px; /* Increased from 90px for better visibility */
     width: auto;
     animation: ${logoEntrance} 0.8s ease-out;
     transition: transform 0.3s ease;

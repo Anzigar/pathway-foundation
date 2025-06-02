@@ -235,6 +235,52 @@ const products = [
  * @returns {JSX.Element} The Home page component
  */
 const Home = () => {
+  const impactStats = [
+    { title: "Projects", value: "4", description: "Completed Projects" },
+    { title: "Regions", value: "10", description: "Across Tanzania" },
+    { title: "Beneficiaries", value: "10,000+", description: "Lives Impacted" },
+    { title: "Years", value: "18", description: "Years of Experience" },
+  ];
+  
+  const focusAreas = [
+    {
+      title: "Livelihoods & Economic Empowerment",
+      description: "Creating sustainable economic opportunities for vulnerable communities.",
+      icon: "economic",
+      link: "/projects/bodaboda-youth-empowerment"
+    },
+    {
+      title: "Gender Equality & Social Inclusion",
+      description: "Promoting equal rights and opportunities for all genders and social groups.",
+      icon: "gender",
+      link: "/projects/menstrual-justice"
+    },
+    {
+      title: "Youth Development & Leadership",
+      description: "Empowering young people with skills and opportunities to lead change.",
+      icon: "youth",
+      link: "/projects/youth-football"
+    },
+    {
+      title: "WASH & Health in Communities and Schools",
+      description: "Improving access to clean water, sanitation, and health services.",
+      icon: "wash",
+      link: "/projects/mtambani-wash"
+    },
+    {
+      title: "Climate Resilience & Innovation",
+      description: "Building community resilience to climate change through innovation.",
+      icon: "climate",
+      link: "/projects/mtambani-wash"
+    },
+    {
+      title: "Emergency Response & Resilience",
+      description: "Providing timely assistance during emergencies and building resilience.",
+      icon: "emergency",
+      link: "/projects"
+    }
+  ];
+  
   return (
     <>
       <Hero />
