@@ -63,11 +63,11 @@ const Hero = () => {
       description: "Through collaboration and innovation, we're helping communities develop sustainable solutions for long-term prosperity.",
       primaryButton: {
         text: "Our Impact",
-        link: "/impact"
+        link: "/blog"
       },
       secondaryButton: {
         text: "Support Us",
-        link: "/support"
+        link: "/donate"
       }
     }
   ];
@@ -86,7 +86,7 @@ const Hero = () => {
     }
   };
   
-  // Function for next slide, memoized with useCallback to make it safe for dependency arrays
+  // Update the handleNextSlide function to ensure proper mobile functionality
   const handleNextSlide = useCallback(() => {
     if (isSliding) return;
     setIsSliding(true);
@@ -99,10 +99,10 @@ const Hero = () => {
       CAROUSEL_CONFIG.animationDuration.default;
     
     setTimeout(() => setIsSliding(false), animationDuration);
-  }, [isSliding, carouselSlides.length, CAROUSEL_CONFIG.animationDuration.mobile, CAROUSEL_CONFIG.animationDuration.default]);
+  }, [carouselSlides.length]);
   
-  // Function for previous slide
-  const handlePrevSlide = () => {
+  // Update the handlePrevSlide function for better mobile handling
+  const handlePrevSlide = useCallback(() => {
     if (isSliding) return;
     setIsSliding(true);
     setDirection("prev");
@@ -114,10 +114,10 @@ const Hero = () => {
       CAROUSEL_CONFIG.animationDuration.default;
     
     setTimeout(() => setIsSliding(false), animationDuration);
-  };
+  }, [carouselSlides.length]);
   
-  // Function to go to a specific slide
-  const goToSlide = (index) => {
+  // Update the goToSlide function for better mobile handling
+  const goToSlide = useCallback((index) => {
     if (isSliding || index === currentImage) return;
     setIsSliding(true);
     setDirection(index > currentImage ? "next" : "prev");
@@ -129,7 +129,7 @@ const Hero = () => {
       CAROUSEL_CONFIG.animationDuration.default;
     
     setTimeout(() => setIsSliding(false), animationDuration);
-  };
+  }, [isSliding, currentImage]);
   
   // Auto-scroll effect
   useEffect(() => {
@@ -175,7 +175,7 @@ const Hero = () => {
           <CarouselTrack 
             style={{ 
               transform: `translateX(-${currentImage * 100}%)`,
-              transition: isSliding ? `transform ${window.innerWidth <= 576 ? 0.5 : 0.6}s ease-in-out` : "none" 
+              transition: isSliding ? `transform ${window.innerWidth <= 576 ? 0.5 : 0.6}s ease-in-out` : "none"
             }}
             onAnimationEnd={handleAnimationEnd}
           >
@@ -296,15 +296,17 @@ const HeroInnerContainer = styled.div`
   }
   
   @media (max-width: 576px) {
-    height: 420px; /* Reduced height for better content fit on mobile */
+    height: 450px; /* Adequate height for mobile */
   }
   
   @media (max-width: 480px) {
-    height: 450px; /* Increased height to show more of the image */
+    height: 400px; /* Consistent height */
+    min-height: 400px;
   }
   
   @media (max-width: 360px) {
-    height: 420px;
+    height: 380px;
+    min-height: 380px;
   }
 `;
 
@@ -339,18 +341,18 @@ const HeroOverlay = styled.div`
   @media (max-width: 576px) {
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.2) 0%,
-      rgba(0, 0, 0, 0.6) 50%,
-      rgba(0, 0, 0, 0.75) 100%
+      rgba(0, 0, 0, 0.05) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.65) 100%
     );
   }
   
   @media (max-width: 480px) {
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.3) 0%,
-      rgba(0, 0, 0, 0.6) 40%, /* Less dark to show more of the image */
-      rgba(0, 0, 0, 0.8) 100%
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.35) 50%,
+      rgba(0, 0, 0, 0.7) 100%
     );
   }
 `;
@@ -469,8 +471,19 @@ const HeroTitle = styled.h1`
     margin-bottom: 12px;
     width: 100%;
     text-align: center;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); /* Stronger shadow for better readability */
-    min-height: 1.2em; /* Ensure consistent height */
+    text-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.8),
+      0 2px 6px rgba(0, 0, 0, 0.6),
+      0 0 10px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    padding: 5px;
+    border-radius: 4px;
   }
   
   @media (max-width: 480px) {
@@ -478,6 +491,10 @@ const HeroTitle = styled.h1`
     margin-bottom: 10px;
     padding: 0;
     min-height: 1.2em;
+    text-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.9),
+      0 3px 8px rgba(0, 0, 0, 0.7),
+      0 0 15px rgba(0, 0, 0, 0.5);
   }
 `;
 
@@ -500,13 +517,23 @@ const HeroDescription = styled.p`
     width: 100%;
     text-align: center;
     max-width: 100%;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8); /* Stronger shadow for better readability */
+    text-shadow: 
+      0 1px 6px rgba(0, 0, 0, 0.8),
+      0 2px 6px rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    border-radius: 6px;
+    backdrop-filter: blur(2px);
   }
   
   @media (max-width: 480px) {
     font-size: 14px;
     margin-bottom: 15px;
     -webkit-line-clamp: 3;
+    text-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.9),
+      0 3px 8px rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -630,20 +657,87 @@ const NavButton = styled.button`
   }
   
   @media (max-width: 576px) {
-    width: 32px;
-    height: 32px;
-    top: 30%; /* Move buttons away from centered content */
-    ${props => props.direction === "left" ? "left: 10px;" : "right: 10px;"}
-    opacity: 0.6;
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    ${props => props.direction === "left" ? "left: 15px;" : "right: 15px;"}
+    opacity: 0.9;
+    background-color: rgba(255, 255, 255, 0.6);
+    pointer-events: auto;
+    touch-action: manipulation;
+    z-index: 25;
+    
+    &:active {
+      background-color: rgba(255, 255, 255, 0.8);
+      transform: translateY(-50%) scale(0.95);
+    }
   }
   
   @media (max-width: 480px) {
-    width: 26px;
-    height: 26px;
-    top: 30%;
+    width: 36px;
+    height: 36px;
+    ${props => props.direction === "left" ? "left: 10px;" : "right: 10px;"}
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.7);
   }
 `;
 
+// Make indicators more visible and functional on mobile
+const CarouselIndicators = styled.div`
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  z-index: 20;
+  
+  @media (max-width: 576px) {
+    bottom: 20px;
+    gap: 12px;
+  }
+  
+  @media (max-width: 480px) {
+    bottom: 20px;
+    gap: 10px;
+  }
+`;
+
+const CarouselIndicator = styled.button`
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: ${props => props.active ? 'var(--secondary-color, #EFB000)' : 'rgba(255, 255, 255, 0.7)'};
+  transition: color 0.3s ease, transform 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  
+  &:hover {
+    color: ${props => props.active ? 'var(--secondary-color, #EFB000)' : 'rgba(255, 255, 255, 0.9)'};
+    transform: scale(1.2);
+  }
+  
+  @media (max-width: 480px) {
+    padding: 12px;
+    pointer-events: auto;
+    touch-action: manipulation;
+    min-width: 44px;
+    min-height: 44px;
+    z-index: 25;
+    position: relative;
+    
+    svg {
+      font-size: 12px;
+    }
+    
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+`;
+
+// Ensure proper container setup for carousel functionality
 const CarouselContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -653,13 +747,17 @@ const CarouselContainer = styled.div`
   
   @media (max-width: 576px) {
     border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
   }
   
   @media (max-width: 480px) {
-    /* Ensure container maintains proper aspect ratio */
-    aspect-ratio: 3/4;
-    max-height: 450px;
-    height: auto;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
   }
 `;
 
@@ -667,21 +765,40 @@ const CarouselTrack = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  transition: transform 0.6s ease-in-out;
   
   @media (max-width: 576px) {
+    width: 100%;
     height: 100%;
-    will-change: transform; /* Performance optimization for mobile */
+    will-change: transform;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  @media (max-width: 480px) {
+    transition: transform 0.4s ease-in-out;
+    width: 100%;
   }
 `;
 
 const CarouselSlide = styled.div`
   min-width: 100%;
+  width: 100%;
   height: 100%;
   flex-shrink: 0;
+  position: relative;
   
   @media (max-width: 576px) {
+    min-width: 100%;
+    width: 100%;
     height: 100%;
-    overflow: hidden; /* Ensure no overflow on small screens */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  @media (max-width: 480px) {
+    min-width: 100%;
+    width: 100%;
+    touch-action: pan-y;
   }
 `;
 
@@ -689,70 +806,28 @@ const SlideImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block; /* Ensure proper display */
   
   @media (max-width: 576px) {
-    object-position: center 30%; /* Position to show more of the subject rather than just center */
+    object-position: center;
+    object-fit: cover; /* Maintain aspect ratio without zoom */
+    transform: none;
+    scale: 1; /* Explicitly prevent any scaling */
   }
   
   @media (max-width: 480px) {
-    /* Improve image quality and positioning on small screens */
     object-fit: cover;
-    object-position: center 25%; /* Adjust vertical position to show important parts */
-    transform: scale(1.05); /* Slightly zoom in to show more detail */
+    object-position: center;
+    transform: none;
+    scale: 1;
+    width: 100%;
+    height: 100%;
   }
   
   @media (max-width: 360px) {
-    object-position: center 20%; /* Further adjust for very small screens */
-  }
-`;
-
-const CarouselIndicators = styled.div`
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  z-index: 15; /* Increased to ensure visibility */
-  
-  @media (max-width: 576px) {
-    bottom: 15px;
-    gap: 10px;
-  }
-  
-  @media (max-width: 480px) {
-    bottom: 15px; /* Move up for better visibility */
-    gap: 8px;
-  }
-`;
-
-const CarouselIndicator = styled.button`
-  background: none;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-  color: ${props => props.active ? 'var(--secondary-color, #EFB000)' : 'rgba(255, 255, 255, 0.6)'};
-  transition: color 0.3s ease, transform 0.3s ease;
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
-  
-  &:hover {
-    color: ${props => props.active ? 'var(--secondary-color, #EFB000)' : 'rgba(255, 255, 255, 0.9)'};
-    transform: scale(1.2);
-  }
-  
-  @media (max-width: 480px) {
-    padding: 4px;
-    
-    /* Make the touch target larger while keeping the visual size the same */
-    &::after {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-    }
+    object-position: center;
+    transform: none;
+    scale: 1;
   }
 `;
 
@@ -764,7 +839,7 @@ const TimerIndicator = styled.div`
   background-color: rgba(255, 255, 255, 0.7);
   width: ${props => props.progress}%;
   transition: width 0.1s linear;
-  z-index: 20;
+  z-index: 15; /* Lower than navigation elements */
 `;
 
 export default Hero;

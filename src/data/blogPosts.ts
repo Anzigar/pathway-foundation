@@ -49,7 +49,7 @@ export const blogPosts: Blog[] = [
       name: "BOYEP",
       slug: "boyep"
     },
-    featured_image: "/images/boeyp.jpg",
+    featured_image: "/images/road_safety.jpg",
     reading_time_minutes: 4,
     tags: ["Road Safety", "Leadership", "Training"]
   },
@@ -76,7 +76,7 @@ export const blogPosts: Blog[] = [
       name: "BOYEP",
       slug: "boyep"
     },
-    featured_image: "/images/boeyp.jpg",
+    featured_image: "/images/changing_narrative.jpg",
     reading_time_minutes: 4,
     tags: ["Youth Empowerment", "Civic Participation", "Social Change"]
   },
@@ -97,7 +97,7 @@ export const blogPosts: Blog[] = [
       name: "WASH",
       slug: "wash"
     },
-    featured_image: "/images/mtambani_project.jpg",
+    featured_image: "/images/patnering_with_school.jpg",
     reading_time_minutes: 3,
     tags: ["School Committees", "WASH", "Partnerships"]
   },
@@ -122,7 +122,7 @@ export const blogPosts: Blog[] = [
       name: "WASH",
       slug: "wash"
     },
-    featured_image: "/images/mtambani_project.jpg",
+    featured_image: "/images/community_sees_progress.jpg",
     reading_time_minutes: 3,
     tags: ["Community Engagement", "School Sanitation", "Progress"]
   },

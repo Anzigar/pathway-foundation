@@ -283,10 +283,22 @@ const ContactUs = () => {
                     <FaMapMarkerAlt />
                   </ContactIcon>
                   <ContactText>
-                    <ContactItemTitle>Our Location</ContactItemTitle>
+                    <ContactItemTitle>Tanzania Office</ContactItemTitle>
                     <ContactItemContent>
                       Mabwepande, Bunju B, Kinondoni Municipal<br />
                       Dar es Salaam, Tanzania
+                    </ContactItemContent>
+                  </ContactText>
+                </ContactItem>
+                
+                <ContactItem>
+                  <ContactIcon>
+                    <FaMapMarkerAlt />
+                  </ContactIcon>
+                  <ContactText>
+                    <ContactItemTitle>USA Headquarters</ContactItemTitle>
+                    <ContactItemContent>
+                      Texas, United States of America
                     </ContactItemContent>
                   </ContactText>
                 </ContactItem>

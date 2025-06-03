@@ -43,6 +43,17 @@ const Paragraph = styled.p`
   color: #444;
 `;
 
+const List = styled.ul`
+  margin: 1rem 0 1.5rem 2rem;
+  
+  li {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+`;
+
 const ValuesContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -113,15 +124,15 @@ const AboutUs = () => {
         <SubTitle>Our Story</SubTitle>
         <Paragraph>
           Pathways Foundation for the Poor (PFP) began its journey in East Africa, with Tanzania as its operational base. 
-          Registered as a Non-Governmental Organization (NGO) in 2006, PFP has implemented community-driven programs across 
+          Registered as a Non-Governmental Organization (NGO) in 2016, PFP has implemented community-driven programs across 
           various zones in Tanzania:
         </Paragraph>
-        <ul>
+        <List>
           <li>Coastal Zone: Dar es Salaam and Pwani</li>
           <li>Eastern Zone: Morogoro and Tanga</li>
           <li>Central Zone: Dodoma and Singida</li>
           <li>Western Zone: Tabora, Kigoma, Rukwa, and Katavi</li>
-        </ul>
+        </List>
         <Paragraph>
           Our work spans youth empowerment, gender equality, livelihoods, WASH, and climate resilience, reaching thousands 
           of marginalized individuals, particularly women and girls. In 2024, PFP was officially registered in the United 

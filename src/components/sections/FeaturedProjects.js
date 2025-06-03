@@ -79,7 +79,7 @@ const FeaturedProjects = () => {
       title: "BOYEP",
       description: "Building Opportunities for Youth Economic Participation program helps young people develop vocational skills and find sustainable employment opportunities.",
       image: "/images/boeyp.jpg",
-      link: "/projects/past/boyep",
+      link: "/projects",
       imageAlt: "Youth in vocational training workshop"
     },
     {
@@ -87,7 +87,7 @@ const FeaturedProjects = () => {
       title: "Mtambani WASH",
       description: "Our Water, Sanitation and Hygiene initiative in the Mtambani community has provided clean water access to over 5,000 residents.",
       image: "/images/mtambani_project.jpg",
-      link: "/projects/past/mtambani-wash",
+      link: "/projects",
       imageAlt: "Clean water access point in Mtambani"
     },
     {
@@ -95,7 +95,7 @@ const FeaturedProjects = () => {
       title: "Youth Football Initiative",
       description: "Using football as a tool for youth development, leadership training, and community building in vulnerable areas.",
       image: "/images/supplying_jerseys/football.jpg",
-      link: "/projects/current/empowering-youth-through-football",
+      link: "/projects",
       imageAlt: "Youth playing football"
     }
   ];

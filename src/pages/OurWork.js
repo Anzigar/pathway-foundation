@@ -261,33 +261,34 @@ const OurWork = () => {
   ];
 
   const projects = [
+    
     {
       id: 1,
-      title: "Bodaboda Youth Empowerment Project (BOYEP)",
-      description: "Empowered youth through motorcycle taxi business training, providing sustainable livelihoods for over 200 young people in Dar es Salaam. The project included skills training, safety workshops, and microfinance opportunities.",
-      image: "/images/education.JPG",
-      // link: "/projects/bodaboda-youth-empowerment",
-      location: "Dar es Salaam, Tanzania",
-      status: "Past",
-      year: "2018-2020"
-    },
-    {
-      id: 2,
       title: "Empowering Youth Through Football",
       description: "Used football as a vehicle for youth development, reaching 500+ young people with life skills training, health education, and leadership opportunities through organized sports activities and tournaments.",
       image: "/images/hero-3.jpg",
-      // link: "/projects/youth-football",
-      location: "Dodoma, Tanzania",
+      link: "/projects",
+      location: "Dar es Salaam, Tanzania",
       status: "Current",
       year: "2022-Present"
+    },
+    {
+      id: 2,
+      title: "Bodaboda Youth Empowerment Project (BOYEP)",
+      description: "Empowered youth through motorcycle taxi business training, providing sustainable livelihoods for over 200 young people in Dar es Salaam. The project included skills training, safety workshops, and microfinance opportunities.",
+      image: "/images/education.JPG",
+      link: "/projects",
+      location: "Dar es Salaam, Tanzania",
+      status: "Past",
+      year: "2018-2020"
     },
     {
       id: 3,
       title: "Mtambani Water, Sanitation and Hygiene Project",
       description: "Improved water access and sanitation for 10,000+ community members by constructing water points, latrines in schools, and training community members on hygiene practices and sustainable water management.",
       image: "/images/clean_water.jpg",
-      // link: "/projects/mtambani-wash",
-      location: "Kigoma, Tanzania",
+      link: "/projects",
+      location: "Dar es Salaam, Tanzania",
       status: "Past",
       year: "2019-2021"
     }

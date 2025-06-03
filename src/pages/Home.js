@@ -330,7 +330,7 @@ const Home = () => {
               <ProductCard key={product.id}>
                 <ProductImageWrapper>
                   <ProductImage src={product.image} alt={product.name} />
-                  {product.badge && <ProductBadge>{product.badge}</ProductBadge>}
+                  {/* {product.badge && <ProductBadge>{product.badge}</ProductBadge>} */}
                 </ProductImageWrapper>
                 <ProductContent>
                   <ProductName>{product.name}</ProductName>
