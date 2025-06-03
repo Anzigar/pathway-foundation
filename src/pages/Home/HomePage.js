@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { ReactComponent as LogoSVG } from "../../assets/logo2.svg"; // Adjust the path as necessary
+import LogoSVG from "../../assets/logo.svg";
 
 // Animation for logo entrance
 const logoEntrance = keyframes`
@@ -110,7 +110,7 @@ const NavMenu = styled.nav`
   }
 `;
 
-const NavItem = styled(NavLink)`
+const NavItem = styled(Link)`
   color: ${props => props.theme?.colors?.primary || "#087FAE"};
   margin: 0 0.75rem; /* Reduced horizontal margin between nav items */
   font-weight: 500;
@@ -214,7 +214,57 @@ const MobileNavContainer = styled.div`
   display: ${props => props.isOpen ? 'flex' : 'none'};
 `;
 
-// Removed unused MobileMenuButton component
+// Impact stats data
+const impactStats = [
+  { title: "Projects", value: "4", description: "Completed Projects" },
+  { title: "Regions", value: "10", description: "Across Tanzania" },
+  { title: "Beneficiaries", value: "10,000+", description: "Lives Impacted" },
+  { title: "Years", value: "18", description: "Years of Experience" },
+];
+
+// Styled components for impact section
+const StatsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+`;
+
+const StatItem = styled.div`
+  text-align: center;
+  margin: 1rem 0;
+  flex: 1 1 200px; /* Responsive flex basis */
+`;
+
+const StatValue = styled.div`
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+`;
+
+const StatTitle = styled.div`
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+`;
+
+const StatDescription = styled.div`
+  font-size: 0.875rem;
+  color: #666;
+`;
+
+// Component for rendering impact stats
+const ImpactSection = () => (
+  <StatsContainer>
+    {impactStats.map((stat, index) => (
+      <StatItem key={index}>
+        <StatValue>{stat.value}</StatValue>
+        <StatTitle>{stat.title}</StatTitle>
+        <StatDescription>{stat.description}</StatDescription>
+      </StatItem>
+    ))}
+  </StatsContainer>
+);
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -297,3 +347,125 @@ const Header = () => {
 };
 
 export default Header;
+
+// Update carousel styles for better responsiveness on mobile
+const CarouselWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    height: 60vh; // Adjust height for mobile
+  }
+`;
+
+const CarouselContent = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  width: 90%;
+  max-width: 800px;
+  
+  @media (max-width: 768px) {
+    top: 40%; // Move content up on mobile for better visibility
+  }
+`;
+
+const CarouselTitle = styled.h1`
+  color: white;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem; // Smaller font on mobile
+  }
+`;
+
+const CarouselDescription = styled.p`
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem; // Smaller font on mobile
+    margin-bottom: 1.5rem;
+  }
+`;
+
+// Updated carousel items with different project photos
+const carouselItems = [
+  {
+    image: "/images/football-project.jpg",
+    title: "Empowering Youth Through Football",
+    description: "Building leadership skills and community resilience through sports",
+    buttons: [
+      { text: "Donate", link: "/donate", isPrimary: true },
+      { text: "Learn More", link: "/projects/youth-football", isPrimary: false }
+    ]
+  },
+  {
+    image: "/images/bodaboda-project.jpg",
+    title: "Youth Economic Empowerment",
+    description: "Creating sustainable livelihoods for young people in Tanzania",
+    buttons: [
+      { text: "Donate", link: "/donate", isPrimary: true },
+      { text: "Learn More", link: "/projects/bodaboda-youth-empowerment", isPrimary: false }
+    ]
+  },
+  {
+    image: "/images/wash-project.jpg",
+    title: "Water, Sanitation & Hygiene",
+    description: "Improving access to clean water and sanitation facilities in rural communities",
+    buttons: [
+      { text: "Donate", link: "/donate", isPrimary: true },
+      { text: "Learn More", link: "/projects/mtambani-wash", isPrimary: false }
+    ]
+  }
+];
+
+// Updated focus areas with links to corresponding projects
+const focusAreas = [
+  {
+    title: "Livelihoods & Economic Empowerment",
+    description: "Creating sustainable economic opportunities for vulnerable communities.",
+    icon: "economic",
+    link: "/projects/bodaboda-youth-empowerment"
+  },
+  {
+    title: "Gender Equality & Social Inclusion",
+    description: "Promoting equal rights and opportunities for all genders and social groups.",
+    icon: "gender",
+    link: "/projects/menstrual-justice"
+  },
+  {
+    title: "Youth Development & Leadership",
+    description: "Empowering young people with skills and opportunities to lead change.",
+    icon: "youth",
+    link: "/projects/youth-football"
+  },
+  {
+    title: "WASH & Health in Communities and Schools",
+    description: "Improving access to clean water, sanitation, and health services.",
+    icon: "wash",
+    link: "/projects/mtambani-wash"
+  },
+  {
+    title: "Climate Resilience & Innovation",
+    description: "Building community resilience to climate change through innovation.",
+    icon: "climate",
+    link: "/projects/mtambani-wash"
+  },
+  {
+    title: "Emergency Response & Resilience",
+    description: "Providing timely assistance during emergencies and building resilience.",
+    icon: "emergency",
+    link: "/projects"
+  }
+];

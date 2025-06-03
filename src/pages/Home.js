@@ -316,7 +316,7 @@ const Home = () => {
                 <FaGlobe />
               </StatIcon>
               <StatNumber>12</StatNumber>
-              <StatLabel>Communities Served</StatLabel>
+              <StatLabel>Regions Served</StatLabel>
             </StatCard>
           </StatsContainer>
         </ImpactContent>

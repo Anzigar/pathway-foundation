@@ -32,12 +32,15 @@ const FooterContent = styled.div`
 // Improved grid layout with better responsiveness
 const FooterGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   gap: 2.5rem;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
   }
   
   @media (max-width: 576px) {
@@ -54,9 +57,9 @@ const FooterHeading = styled.h3`
   color: #EFB000;
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
   position: relative;
-  padding-bottom: 0.8rem;
+  padding-bottom: 1rem;
   
   &:after {
     content: '';
@@ -65,14 +68,14 @@ const FooterHeading = styled.h3`
     bottom: 0;
     width: 40px;
     height: 2px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.3);
   }
 `;
 
 const FooterDescription = styled.p`
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
   font-size: 0.95rem;
 `;
 
@@ -121,16 +124,17 @@ const LocationItem = styled(ContactItem)`
 const LocationTitle = styled(ContactLabel)``;
 
 const FooterLink = styled(Link)`
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
   font-size: 0.95rem;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  transition: color 0.2s ease;
   
   &:hover {
     color: #EFB000;
+    transform: translateX(3px);
   }
 `;
 
@@ -188,6 +192,16 @@ const PoweredBy = styled.div`
   font-size: 0.85rem;
 `;
 
+// Add logo to footer for better visibility
+const FooterLogo = styled.div`
+  margin-bottom: 1.2rem;
+  
+  img {
+    height: 80px;
+    width: auto;
+  }
+`;
+
 const Footer = () => {
   return (
     <FooterContainer>
@@ -195,6 +209,9 @@ const Footer = () => {
         <FooterGrid>
           <FooterSection>
             <FooterHeading>About Us</FooterHeading>
+            <FooterLogo>
+              <img src="/images/Asset.png" alt="Pathways Foundation for the Poor" />
+            </FooterLogo>
             <FooterDescription>
               Pathways Foundation for the Poor (PFP) is committed to uplifting the lives of
               impoverished and vulnerable communities by tackling the root causes of poverty,
@@ -286,33 +303,8 @@ const Footer = () => {
           <FooterSection>
             <FooterHeading>Our Projects</FooterHeading>
             <FooterLink to="/projects/bodaboda-youth-empowerment">Bodaboda Youth Empowerment</FooterLink>
-            <FooterLink to="/projects/menstrual-justice">Menstrual Justice</FooterLink>
             <FooterLink to="/projects/youth-football">Youth Through Football</FooterLink>
             <FooterLink to="/projects/mtambani-wash">Mtambani WASH Project</FooterLink>
-          </FooterSection>
-
-          <FooterSection>
-            <FooterHeading>Media & Resources</FooterHeading>
-            <ExternalLink href="/resources/photos">
-              <IconWrapper style={{width: '24px', height: '24px', marginRight: '10px'}}>
-                <FaImage size={12} />
-              </IconWrapper>
-              Photos
-            </ExternalLink>
-            <ExternalLink href="/resources/videos">
-              <IconWrapper style={{width: '24px', height: '24px', marginRight: '10px'}}>
-                <FaVideo size={12} />
-              </IconWrapper>
-              Videos
-            </ExternalLink>
-            <ExternalLink href="/resources/reports">
-              <IconWrapper style={{width: '24px', height: '24px', marginRight: '10px'}}>
-                <FaFileAlt size={12} />
-              </IconWrapper>
-              Annual Reports
-            </ExternalLink>
-            <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
-            <FooterLink to="/terms-conditions">Terms & Conditions</FooterLink>
           </FooterSection>
         </FooterGrid>
       </FooterContent>
