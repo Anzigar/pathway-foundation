@@ -299,7 +299,7 @@ const Home = () => {
               <StatIcon>
                 <FaHandHoldingHeart />
               </StatIcon>
-              <StatNumber>4+</StatNumber>
+              <StatNumber>4</StatNumber>
               <StatLabel>Projects Completed</StatLabel>
             </StatCard>
             
@@ -315,7 +315,7 @@ const Home = () => {
               <StatIcon>
                 <FaGlobe />
               </StatIcon>
-              <StatNumber>12</StatNumber>
+              <StatNumber>10</StatNumber>
               <StatLabel>Regions Served</StatLabel>
             </StatCard>
           </StatsContainer>
@@ -335,7 +335,7 @@ const Home = () => {
                 <ProductContent>
                   <ProductName>{product.name}</ProductName>
                   <ProductCta to={product.link}>
-                    Learn More <FaArrowRight />
+                    {/* Learn More <FaArrowRight /> */}
                   </ProductCta>
                 </ProductContent>
               </ProductCard>

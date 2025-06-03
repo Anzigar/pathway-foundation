@@ -265,7 +265,7 @@ const OurWork = () => {
       id: 1,
       title: "Bodaboda Youth Empowerment Project (BOYEP)",
       description: "Empowered youth through motorcycle taxi business training, providing sustainable livelihoods for over 200 young people in Dar es Salaam. The project included skills training, safety workshops, and microfinance opportunities.",
-      image: "/images/education.jpg",
+      image: "/images/education.JPG",
       // link: "/projects/bodaboda-youth-empowerment",
       location: "Dar es Salaam, Tanzania",
       status: "Past",

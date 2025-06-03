@@ -296,15 +296,15 @@ const HeroInnerContainer = styled.div`
   }
   
   @media (max-width: 576px) {
-    height: 450px; /* Better height for mobile */
+    height: 420px; /* Reduced height for better content fit on mobile */
   }
   
   @media (max-width: 480px) {
-    height: 400px;
+    height: 450px; /* Increased height to show more of the image */
   }
   
   @media (max-width: 360px) {
-    height: 350px; /* Adjust for very small screens */
+    height: 420px;
   }
 `;
 
@@ -318,6 +318,7 @@ const slideOutAnimation = keyframes`
   to { transform: translateX(-100%); }
 `;
 
+// Adjust overlay for better text visibility on small screens
 const HeroOverlay = styled.div`
   position: absolute;
   top: 0;
@@ -341,6 +342,15 @@ const HeroOverlay = styled.div`
       rgba(0, 0, 0, 0.2) 0%,
       rgba(0, 0, 0, 0.6) 50%,
       rgba(0, 0, 0, 0.75) 100%
+    );
+  }
+  
+  @media (max-width: 480px) {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.6) 40%, /* Less dark to show more of the image */
+      rgba(0, 0, 0, 0.8) 100%
     );
   }
 `;
@@ -408,14 +418,21 @@ const HeroTextContent = styled.div`
   }
   
   @media (max-width: 576px) {
-    width: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    left: 0;
+    top: 50%; /* Position in the middle vertically */
+    transform: translateY(-50%); /* Center vertically with transform */
+    padding: 0 20px;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    height: auto; /* Don't stretch to full height */
   }
   
   @media (max-width: 480px) {
-    width: 90%;
+    padding: 0 15px;
   }
   
   /* Fix iOS Safari issues */
@@ -424,7 +441,12 @@ const HeroTextContent = styled.div`
     -webkit-transform: translateY(-50%);
     
     @media (max-width: 576px) {
-      -webkit-transform: translate(-50%, -50%);
+      -webkit-transform: translateY(-50%); /* iOS-specific vertical centering */
+      height: auto;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   }
 `;
@@ -442,9 +464,20 @@ const HeroTitle = styled.h1`
     margin-bottom: 20px;
   }
   
+  @media (max-width: 576px) {
+    font-size: 28px;
+    margin-bottom: 12px;
+    width: 100%;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); /* Stronger shadow for better readability */
+    min-height: 1.2em; /* Ensure consistent height */
+  }
+  
   @media (max-width: 480px) {
-    font-size: 30px;
-    margin-bottom: 16px;
+    font-size: 24px;
+    margin-bottom: 10px;
+    padding: 0;
+    min-height: 1.2em;
   }
 `;
 
@@ -462,14 +495,18 @@ const HeroDescription = styled.p`
   }
   
   @media (max-width: 576px) {
+    font-size: 16px;
+    margin-bottom: 20px; /* Add consistent spacing */
+    width: 100%;
+    text-align: center;
     max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8); /* Stronger shadow for better readability */
   }
   
   @media (max-width: 480px) {
-    font-size: 16px;
-    margin-bottom: 24px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    -webkit-line-clamp: 3;
   }
 `;
 
@@ -480,12 +517,24 @@ const HeroButtons = styled.div`
   
   @media (max-width: 576px) {
     justify-content: center;
+    width: 100%;
+    gap: 16px;
   }
   
   @media (max-width: 480px) {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row; /* Keep buttons side-by-side */
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    justify-content: center;
+    width: 100%;
+    gap: 12px;
+    margin-top: 0; /* Remove extra margin */
+  }
+  
+  @media (max-width: 360px) {
+    flex-direction: column; /* Stack buttons on very small screens */
     align-items: center;
-    gap: 16px;
+    gap: 10px;
   }
 `;
 
@@ -510,9 +559,24 @@ const Button = styled(Link)`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
+  @media (max-width: 576px) {
+    padding: 10px 18px;
+    font-size: 14px;
+    min-width: 120px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  
   @media (max-width: 480px) {
-    padding: 12px 24px;
-    font-size: 15px;
+    padding: 8px 16px;
+    font-size: 13px;
+    min-width: 110px;
+    white-space: nowrap;
+  }
+  
+  @media (max-width: 360px) {
+    width: 80%; /* Wider buttons when stacked */
+    padding: 8px 0;
   }
 `;
 
@@ -565,11 +629,18 @@ const NavButton = styled.button`
     ${props => props.direction === "left" ? "left: 10px;" : "right: 10px;"}
   }
   
-  @media (max-width: 480px) {
+  @media (max-width: 576px) {
     width: 32px;
     height: 32px;
-    font-size: 12px;
-    ${props => props.direction === "left" ? "left: 8px;" : "right: 8px;"}
+    top: 30%; /* Move buttons away from centered content */
+    ${props => props.direction === "left" ? "left: 10px;" : "right: 10px;"}
+    opacity: 0.6;
+  }
+  
+  @media (max-width: 480px) {
+    width: 26px;
+    height: 26px;
+    top: 30%;
   }
 `;
 
@@ -581,7 +652,14 @@ const CarouselContainer = styled.div`
   border-radius: 20px;
   
   @media (max-width: 576px) {
-    border-radius: 10px; /* Smaller radius on mobile */
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 480px) {
+    /* Ensure container maintains proper aspect ratio */
+    aspect-ratio: 3/4;
+    max-height: 450px;
+    height: auto;
   }
 `;
 
@@ -603,6 +681,7 @@ const CarouselSlide = styled.div`
   
   @media (max-width: 576px) {
     height: 100%;
+    overflow: hidden; /* Ensure no overflow on small screens */
   }
 `;
 
@@ -612,7 +691,18 @@ const SlideImage = styled.img`
   object-fit: cover;
   
   @media (max-width: 576px) {
-    object-position: center; /* Ensure image is centered on mobile */
+    object-position: center 30%; /* Position to show more of the subject rather than just center */
+  }
+  
+  @media (max-width: 480px) {
+    /* Improve image quality and positioning on small screens */
+    object-fit: cover;
+    object-position: center 25%; /* Adjust vertical position to show important parts */
+    transform: scale(1.05); /* Slightly zoom in to show more detail */
+  }
+  
+  @media (max-width: 360px) {
+    object-position: center 20%; /* Further adjust for very small screens */
   }
 `;
 
@@ -632,7 +722,7 @@ const CarouselIndicators = styled.div`
   }
   
   @media (max-width: 480px) {
-    bottom: 10px;
+    bottom: 15px; /* Move up for better visibility */
     gap: 8px;
   }
 `;
