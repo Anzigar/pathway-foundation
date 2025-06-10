@@ -6,6 +6,7 @@ import Partners from "../components/sections/Partners";
 import CallToAction from "../components/sections/CallToAction";
 import { FaHandHoldingHeart, FaUsers, FaGlobe, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import SEO from "../components/seo";
 
 const ImpactSection = styled.section`
   padding: 80px 0;
@@ -283,6 +284,13 @@ const Home = () => {
   
   return (
     <>
+    <SEO
+        title="Empowering Communities in Tanzania"
+        description="Pathways Foundation for the Poor creates sustainable change in Tanzania through education, clean water, healthcare and community development programs."
+        keywords="Pathways Foundation for the Poor, Tanzania NGO, community development, education Tanzania, clean water projects, youth empowerment"
+        canonicalUrl="https://pathwaysfoundation.org"
+
+    />
       <Hero />
       
       <ImpactSection>

@@ -117,7 +117,12 @@ const AboutUs = () => {
   return (
     <div>
       {/* PageHeader if exists */}
-      
+      <SEO
+        title="About Us"
+        description="Learn about Pathways Foundation for the Poor's mission to uplift impoverished communities in Tanzania through sustainable development programs."
+        keywords="about Pathways Foundation, Tanzania charity, poverty alleviation, community development mission"
+        canonicalUrl="https://www.pathwaysfoundation.org/about-us"
+      />
       <AboutContainer>
         <SectionTitle>About Pathways Foundation for the Poor</SectionTitle>
         

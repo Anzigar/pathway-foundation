@@ -1,19 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="utf-8" />
-    <!-- Updated favicon for better visibility -->
-    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Critical Resource Hints (Enterprise Performance) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//google-analytics.com">
+    <link rel="dns-prefetch" href="//googletagmanager.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Optimistic+Display:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Enhanced Favicon Strategy -->
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicon.png">
+    <link rel="mask-icon" href="%PUBLIC_URL%/safari-pinned-tab.svg" color="#087FAE">
+    <meta name="msapplication-TileColor" content="#087FAE">
+    <meta name="msapplication-config" content="%PUBLIC_URL%/browserconfig.xml">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="theme-color" content="#087FAE" />
+    <meta name="color-scheme" content="light dark">
+
+    <!-- Enhanced Title Strategy -->
+    <title>Pathways Foundation for the Poor | NGO Tanzania | Education, Healthcare & Clean Water</title>
+    
+    <!-- Primary Meta Tags (Enterprise Level) -->
+    <meta name="title" content="Pathways Foundation for the Poor | NGO Tanzania | Education, Healthcare & Clean Water">
+    <meta name="description" content="Leading NGO in Tanzania creating sustainable change through education, clean water access, healthcare services, and community development. Join our mission to transform lives and build stronger communities.">
+    <meta name="keywords" content="Pathways Foundation, Tanzania NGO, education Tanzania, clean water projects, healthcare Tanzania, poverty alleviation, community development, sustainable development, charitable organization, non-profit Tanzania">
+    <meta name="author" content="Pathways Foundation for the Poor">
+    <meta name="publisher" content="Pathways Foundation for the Poor">
+    <meta name="copyright" content="© 2024 Pathways Foundation for the Poor">
+    <meta name="rating" content="General">
+    <meta name="distribution" content="Global">
+    <meta name="coverage" content="Worldwide">
+    
+    <!-- Advanced SEO Meta Tags -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="3 days">
+    <meta name="expires" content="never">
+    <meta name="cache-control" content="public">
+    <meta name="classification" content="Non-Profit Organization">
+    <meta name="category" content="NGO, Charity, Social Impact">
+    <meta name="target" content="all">
+    <meta name="audience" content="all">
+    <meta name="web_author" content="Pathways Foundation for the Poor">
+    
+    <!-- Canonical and Alternate URLs -->
+    <link rel="canonical" href="https://pathwaysfoundation.org/">
+    <link rel="alternate" hreflang="en" href="https://pathwaysfoundation.org/">
+    <link rel="alternate" hreflang="sw" href="https://pathwaysfoundation.org/sw/">
+    <link rel="alternate" hreflang="x-default" href="https://pathwaysfoundation.org/">
+
+    <!-- Open Graph Meta Tags (Enhanced) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pathways Foundation for the Poor">
+    <meta property="og:title" content="Pathways Foundation for the Poor | Transforming Lives in Tanzania">
+    <meta property="og:description" content="Leading NGO creating sustainable change in Tanzania through education, clean water, healthcare and community development. Join our mission to transform lives.">
+    <meta property="og:url" content="https://pathwaysfoundation.org/">
+    <meta property="og:image" content="https://pathwaysfoundation.org/og-image-1200x630.jpg">
+    <meta property="og:image:secure_url" content="https://pathwaysfoundation.org/og-image-1200x630.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Pathways Foundation for the Poor - Transforming lives in Tanzania">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="sw_TZ">
+    <meta property="fb:app_id" content="YOUR_FACEBOOK_APP_ID">
+
+    <!-- Twitter Card Meta Tags (Enhanced) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@PathwaysFoundation">
+    <meta name="twitter:creator" content="@PathwaysFoundation">
+    <meta name="twitter:title" content="Pathways Foundation for the Poor | Transforming Lives in Tanzania">
+    <meta name="twitter:description" content="Leading NGO creating sustainable change in Tanzania through education, clean water, healthcare and community development.">
+    <meta name="twitter:image" content="https://pathwaysfoundation.org/twitter-image-1200x600.jpg">
+    <meta name="twitter:image:alt" content="Pathways Foundation for the Poor - Transforming lives in Tanzania">
+    <meta name="twitter:domain" content="pathwaysfoundation.org">
+
+    <!-- Geographic and Location Meta Tags -->
+    <meta name="geo.region" content="TZ">
+    <meta name="geo.country" content="Tanzania">
+    <meta name="geo.placename" content="Tanzania">
+    <meta name="ICBM" content="-6.369028, 34.888822">
+    <meta name="geo.position" content="-6.369028;34.888822">
+
+    <!-- Mobile and App Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Pathways Foundation">
+    <meta name="application-name" content="Pathways Foundation">
+
+    <!-- Enhanced Structured Data (Multiple Schema Types) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "NGO",
+          "@id": "https://pathwaysfoundation.org/#organization",
+          "name": "Pathways Foundation for the Poor",
+          "alternateName": "Pathways Foundation",
+          "description": "Leading NGO in Tanzania creating sustainable change through education, clean water access, healthcare services, and community development.",
+          "url": "https://pathwaysfoundation.org",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://pathwaysfoundation.org/logo-512x512.png",
+            "width": 512,
+            "height": 512
+          },
+          "image": "https://pathwaysfoundation.org/og-image-1200x630.jpg",
+          "telephone": "+255-XXX-XXXX",
+          "email": "info@pathwaysfoundation.org",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "TZ",
+            "addressRegion": "Tanzania"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Tanzania"
+          },
+          "foundingDate": "2020",
+          "knowsAbout": [
+            "Education Development",
+            "Clean Water Access",
+            "Healthcare Services",
+            "Community Development",
+            "Poverty Alleviation",
+            "Sustainable Development",
+            "Social Impact"
+          ],
+          "sameAs": [
+            "https://facebook.com/pathwaysfoundation",
+            "https://twitter.com/pathwaysfoundation",
+            "https://instagram.com/pathwaysfoundation",
+            "https://linkedin.com/company/pathwaysfoundation",
+            "https://youtube.com/pathwaysfoundation"
+          ],
+          "member": {
+            "@type": "Organization",
+            "name": "Tanzania NGO Network"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://pathwaysfoundation.org/#website",
+          "url": "https://pathwaysfoundation.org",
+          "name": "Pathways Foundation for the Poor",
+          "description": "Official website of Pathways Foundation for the Poor",
+          "publisher": {
+            "@id": "https://pathwaysfoundation.org/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://pathwaysfoundation.org/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://pathwaysfoundation.org/#breadcrumbs",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://pathwaysfoundation.org"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Performance and Security Headers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="skype_toolbar" content="skype_toolbar_parser_compatible">
+
+    <!-- Existing meta tags -->
     <meta
       name="description"
       content="Pathways Foundation for the Poor - Uplifting impoverished and vulnerable communities"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
+    <meta name="description" content="Pathways Foundation for the Poor creates sustainable change in Tanzania through education, clean water, healthcare and community development." />
+    <meta name="keywords" content="Pathways Foundation, Tanzania, NGO, education, clean water, healthcare, poverty alleviation" />
+
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>Pathways Foundation for the Poor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Optimistic+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Critical CSS Inline (for performance) -->
+    <style>
+      /* Critical above-the-fold CSS would go here for enterprise performance */
+      body { font-family: 'Optimistic Display', -apple-system, BlinkMacSystemFont, sans-serif; }
+    </style>
+    
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Optimistic+Display:wght@400;500;700&display=swap"></noscript>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

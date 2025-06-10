@@ -6,6 +6,7 @@ import PageBanner from '../components/ui/PageBanner';
 import CallToAction from '../components/sections/CallToAction';
 import ViewCounter from '../components/ui/ViewCounter';
 import { blogPosts } from '../data/blogPosts';
+import SEO from '../components/seo';
 
 /**
  * BlogDetail component for displaying a single blog post

@@ -218,19 +218,14 @@ const Footer = () => {
               boosting household incomes, and promoting overall social well-being.
             </FooterDescription>
             <SocialLinks>
-              <SocialIcon href="https://facebook.com/" target="_blank" rel="noopener noreferrer">
-                <FaFacebook />
-              </SocialIcon>
-              <SocialIcon href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-                <FaTwitter />
-              </SocialIcon>
-              <SocialIcon href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
+   
+              <SocialIcon href="https://www.instagram.com/pfptanzania?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
                 <FaInstagram />
               </SocialIcon>
-              <SocialIcon href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">
+              <SocialIcon href="www.linkedin.com/in/pfp-tanzania-183bb6369" target="_blank" rel="noopener noreferrer">
                 <FaLinkedin />
               </SocialIcon>
-              <SocialIcon href="https://youtube.com/" target="_blank" rel="noopener noreferrer">
+              <SocialIcon href="https://youtube.com/@pfp_tanzania?si=v4yQuOiZv0RJRqIk" target="_blank" rel="noopener noreferrer">
                 <FaYoutube />
               </SocialIcon>
             </SocialLinks>
