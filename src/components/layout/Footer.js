@@ -260,8 +260,17 @@ const Footer = () => {
                 <FaPhone />
               </IconWrapper>
               <ContactTextContainer>
-                <ContactLabel>Phone</ContactLabel>
-                <ContactText>+255 678 495 109</ContactText>
+                <ContactLabel>Phone (USA)</ContactLabel>
+                <ContactText>+1 (346) 420-7021</ContactText>
+              </ContactTextContainer>
+            </ContactItem>
+            <ContactItem>
+              <IconWrapper>
+                <FaPhone />
+              </IconWrapper>
+              <ContactTextContainer>
+                <ContactLabel>Phone (Tanzania)</ContactLabel>
+                <ContactText>+255 684 412 476</ContactText>
               </ContactTextContainer>
             </ContactItem>
             <ContactItem>

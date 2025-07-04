@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Blog } from '../types/api';
 import { formatDateShort } from '../utils/dateFormatter';
+import { useNews, NotificationState } from '../hooks/useNewsAndEvents.jsx';
+import LoadingSpinner from './shared/LoadingSpinner';
+import ErrorMessage from './shared/ErrorMessage';
 
 interface BlogsListProps {
   categoryId?: number | string;
@@ -8,46 +11,24 @@ interface BlogsListProps {
 }
 
 const BlogsList: React.FC<BlogsListProps> = ({ categoryId, limit }) => {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [notification, setNotification] = useState<NotificationState | null>(null);
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        setLoading(true);
-        const response = await BlogService.getAllBlogs();
-        
-        if (response.status === 200) {
-          let filteredBlogs = response.data;
-          
-          // Filter by category if categoryId is provided
-          if (categoryId && filteredBlogs.length > 0) {
-            filteredBlogs = filteredBlogs.filter(blog => 
-              blog.category && blog.category.id === Number(categoryId)
-            );
-          }
-          
-          // Limit the number of blogs if limit is provided
-          if (limit && filteredBlogs.length > limit) {
-            filteredBlogs = filteredBlogs.slice(0, limit);
-          }
-          
-          setBlogs(filteredBlogs);
-          setError(null);
-        } else {
-          setError(response.message || 'Failed to load blogs. Please try again later.');
-        }
-      } catch (err) {
-        setError('An unexpected error occurred. Please try again later.');
-        console.error('Blogs fetch error:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { 
+    news: blogs, 
+    isLoading: loading, 
+    error 
+  } = useNews({
+    filters: { categoryId, limit },
+    onNotificationChange: setNotification
+  });
 
-    fetchBlogs();
-  }, [categoryId, limit]);
+  if (loading) {
+    return <LoadingSpinner message="Loading blogs..." />;
+  }
+
+  if (error) {
+    return <ErrorMessage message={error.message || 'Failed to load blogs'} onRetry={() => window.location.reload()} />;
+  }
 
   if (loading) {
     return <div className="loading-spinner">Loading blog posts...</div>;
@@ -65,7 +46,7 @@ const BlogsList: React.FC<BlogsListProps> = ({ categoryId, limit }) => {
     <div className="blogs-list">
       <h2>Blog Posts</h2>
       <div className="blogs-grid">
-        {blogs.map(blog => (
+        {blogs.map((blog: Blog) => (
           <div key={blog.id} className="blog-card">
             {blog.featured_image && Object.keys(blog.featured_image).length > 0 && (
               <div className="blog-image">

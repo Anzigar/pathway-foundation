@@ -16,6 +16,9 @@ import BlogsPage from './pages/BlogsPage';
 import ContactPage from './pages/ContactPage';
 import DonatePage from './pages/DonatePage';
 import NotFoundPage from './pages/NotFoundPage';
+import NewsEvents from './pages/NewsEvents';
+import AnnouncementsPage from './pages/AnnouncementsPage';
+import PhotoGalleryPage from './pages/PhotoGalleryPage';
 
 // Detail components
 import EventDetail from './components/EventDetail';
@@ -32,14 +35,19 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/about-us" element={<AboutPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
             <Route path="/events" element={<EventsPage />} />
-            <Route path="/events/:eventId" element={<EventDetail />} />
+            <Route path="/events/:slug" element={<EventDetail />} />
             <Route path="/blog" element={<BlogsPage />} />
             <Route path="/blog/:slug" element={<BlogDetail />} />
             <Route path="/blog/category/:categorySlug" element={<BlogsPage />} />
             <Route path="/news/:slug" element={<NewsDetail />} />
+            <Route path="/news-events" element={<NewsEvents />} />
+            <Route path="/news-events/news/:slug" element={<NewsDetail />} />
+            <Route path="/news-events/announcements" element={<AnnouncementsPage />} />
+            <Route path="/news-events/gallery" element={<PhotoGalleryPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/donate" element={<DonatePage />} />
             <Route path="*" element={<NotFoundPage />} />

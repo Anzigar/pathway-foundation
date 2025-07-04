@@ -1,61 +1,68 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import PageBanner from "../components/ui/PageBanner";
 import Card from "../components/ui/Card";
 import CallToAction from "../components/sections/CallToAction";
-import axios from "axios";
 import ViewCounter from "../components/ui/ViewCounter";
+import { useNews, useEvents } from "../hooks/useNewsAndEvents.jsx";
 
 /**
  * NewsEvents - Component for displaying news and events
  * @returns {JSX.Element} The NewsEvents component
  */
 const NewsEvents = () => {
-  const [newsItems, setNewsItems] = useState([]);
-  const [featuredNews, setFeaturedNews] = useState(null);
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [notification, setNotification] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('all');
 
-  // Fetch news and events on component mount
-  useEffect(() => {
-    const fetchNewsAndEvents = async () => {
-      try {
-        setLoading(true);
-        
-        // Fetch news items
-        const newsResponse = await axios.get("http://127.0.0.1:5001/api/news");
-        
-        if (newsResponse.data && newsResponse.data.length > 0) {
-          // Find featured news
-          const featured = newsResponse.data.find(item => item.featured) || newsResponse.data[0];
-          setFeaturedNews(featured);
-          
-          // Set the rest as regular news items (excluding the featured one)
-          setNewsItems(newsResponse.data.filter(item => item.id !== featured.id).slice(0, 5));
-        }
-        
-        // Fetch upcoming events
-        const eventsResponse = await axios.get("http://127.0.0.1:5001/api/events");
-        if (eventsResponse.data) {
-          // Sort events by start_date and get the first 3
-          const upcomingEvents = eventsResponse.data
-            .sort((a, b) => new Date(a.start_date) - new Date(b.start_date))
-            .slice(0, 3);
-          setEvents(upcomingEvents);
-        }
-        
-        setLoading(false);
-      } catch (err) {
-        console.error("Error fetching news and events:", err);
-        setError("Failed to load content. Please try again later.");
-        setLoading(false);
-      }
-    };
-    
-    fetchNewsAndEvents();
-  }, []);
+  // Use the hooks to fetch news and events data
+  const { 
+    news: newsItems, 
+    isLoading: newsLoading, 
+    error: newsError 
+  } = useNews({
+    filters: {},
+    onNotificationChange: setNotification
+  });
+
+  const { 
+    events, 
+    isLoading: eventsLoading, 
+    error: eventsError 
+  } = useEvents({
+    filters: {},
+    onNotificationChange: setNotification
+  });
+
+  // Combine loading states
+  const loading = newsLoading || eventsLoading;
+  const error = newsError || eventsError;
+
+  // Filter data based on active filter
+  const getFilteredData = () => {
+    switch(activeFilter) {
+      case 'news':
+        return { news: newsItems, events: [] };
+      case 'events':
+        return { news: [], events: events };
+      default:
+        return { news: newsItems, events: events };
+    }
+  };
+
+  const { news: filteredNews, events: filteredEvents } = getFilteredData();
+
+  // Get featured news (first item or find featured)
+  const featuredNews = filteredNews.find(item => item.featured) || filteredNews[0];
+  
+  // Get regular news items (excluding featured)
+  const regularNews = filteredNews.filter(item => item.id !== featuredNews?.id).slice(0, 5);
+  
+  // Get upcoming events (sorted by date)
+  const upcomingEvents = filteredEvents
+    .filter(event => new Date(event.start_date || event.date) >= new Date())
+    .sort((a, b) => new Date(a.start_date || a.date) - new Date(b.start_date || b.date))
+    .slice(0, 6);
 
   // Format date helper function
   const formatDate = (dateString) => {
@@ -77,97 +84,138 @@ const NewsEvents = () => {
       
       <NewsEventsSection>
         <SectionContent>
+          {notification && (
+            <NotificationBar type={notification.type}>
+              {notification.message}
+            </NotificationBar>
+          )}
           {loading ? (
             <LoadingIndicator>Loading news and events...</LoadingIndicator>
           ) : error ? (
-            <ErrorMessage>{error}</ErrorMessage>
+            <ErrorMessage>Failed to load content. Please try again later.</ErrorMessage>
           ) : (
             <>
               <TabsContainer>
-                <TabLink to="/news-events" active={true}>All</TabLink>
-                <TabLink to="/news-events/blog">Blog</TabLink>
+                <TabButton 
+                  active={activeFilter === 'all'} 
+                  onClick={() => setActiveFilter('all')}
+                >
+                  All
+                </TabButton>
+                <TabButton 
+                  active={activeFilter === 'news'} 
+                  onClick={() => setActiveFilter('news')}
+                >
+                  News
+                </TabButton>
+                <TabButton 
+                  active={activeFilter === 'events'} 
+                  onClick={() => setActiveFilter('events')}
+                >
+                  Events
+                </TabButton>
                 <TabLink to="/news-events/announcements">Announcements</TabLink>
                 <TabLink to="/news-events/gallery">Photo Gallery</TabLink>
               </TabsContainer>
               
-              <SectionTitle>Latest News & Updates</SectionTitle>
-              
-              {featuredNews && (
-                <FeaturedNews>
-                  <FeaturedImage style={{ backgroundImage: `url(${featuredNews.image_url})` }}>
-                    {featuredNews.categories && featuredNews.categories.length > 0 && (
-                      <FeaturedCategory>{featuredNews.categories[0]}</FeaturedCategory>
-                    )}
-                  </FeaturedImage>
-                  <FeaturedContent>
-                    <FeaturedDate>{formatDate(featuredNews.published_at)}</FeaturedDate>
-                    <FeaturedTitle>{featuredNews.title}</FeaturedTitle>
-                    <FeaturedDescription>{featuredNews.excerpt}</FeaturedDescription>
-                    <ViewWrapper>
-                      <ViewCounter blogId={featuredNews.id} initialCount={featuredNews.view_count || 0} />
-                    </ViewWrapper>
-                    <ReadMoreLink to={`/news-events/news/${featuredNews.slug}`}>
-                      Read More
-                    </ReadMoreLink>
-                  </FeaturedContent>
-                </FeaturedNews>
+              {/* News Section */}
+              {(activeFilter === 'all' || activeFilter === 'news') && filteredNews.length > 0 && (
+                <>
+                  <SectionTitle>Latest News & Updates</SectionTitle>
+                  
+                  {featuredNews && (
+                    <FeaturedNews>
+                      <FeaturedImage style={{ backgroundImage: `url(${featuredNews.image_url || featuredNews.image || (featuredNews.featured_image?.public_url)})` }}>
+                        {featuredNews.categories && featuredNews.categories.length > 0 && (
+                          <FeaturedCategory>{featuredNews.categories[0]}</FeaturedCategory>
+                        )}
+                        {featuredNews.category && (
+                          <FeaturedCategory>{featuredNews.category.name}</FeaturedCategory>
+                        )}
+                      </FeaturedImage>
+                      <FeaturedContent>
+                        <FeaturedDate>{formatDate(featuredNews.published_at || featuredNews.publish_date || featuredNews.createdAt)}</FeaturedDate>
+                        <FeaturedTitle>{featuredNews.title}</FeaturedTitle>
+                        <FeaturedDescription>{featuredNews.excerpt || featuredNews.introduction}</FeaturedDescription>
+                        <ViewWrapper>
+                          <ViewCounter blogId={featuredNews.id} initialCount={featuredNews.view_count || 0} />
+                        </ViewWrapper>
+                        <ReadMoreLink to={`/news-events/news/${featuredNews.slug}`}>
+                          Read More
+                        </ReadMoreLink>
+                      </FeaturedContent>
+                    </FeaturedNews>
+                  )}
+                  
+                  <NewsGrid>
+                    {regularNews.map((item) => (
+                      <Card 
+                        key={item.id}
+                        title={item.title}
+                        description={item.excerpt || item.introduction}
+                        image={item.image_url || item.image || (item.featured_image?.public_url)}
+                        imageAlt={`Image for ${item.title}`}
+                        link={`/news-events/news/${item.slug}`}
+                        footer={
+                          <CardFooter>
+                            <CardDate>{formatDate(item.published_at || item.publish_date || item.createdAt)}</CardDate>
+                            <ViewCounter blogId={item.id} initialCount={item.view_count || 0} />
+                          </CardFooter>
+                        }
+                      />
+                    ))}
+                  </NewsGrid>
+                </>
               )}
               
-              <NewsGrid>
-                {newsItems.map((item) => (
-                  <Card 
-                    key={item.id}
-                    title={item.title}
-                    description={item.excerpt}
-                    image={item.image_url}
-                    imageAlt={`Image for ${item.title}`}
-                    link={`/news-events/news/${item.slug}`}
-                    footer={
-                      <CardFooter>
-                        <CardDate>{formatDate(item.published_at)}</CardDate>
-                        <ViewCounter blogId={item.id} initialCount={item.view_count || 0} />
-                      </CardFooter>
-                    }
-                  />
-                ))}
-              </NewsGrid>
+              {/* Events Section */}
+              {(activeFilter === 'all' || activeFilter === 'events') && filteredEvents.length > 0 && (
+                <UpcomingEventsSection>
+                  <SectionTitle>Upcoming Events</SectionTitle>
+                  <EventsGrid>
+                    {upcomingEvents.map((event) => {
+                      const eventDate = new Date(event.start_date || event.date);
+                      const day = eventDate.getDate();
+                      const month = eventDate.toLocaleString('default', { month: 'short' }).toUpperCase();
+                      
+                      return (
+                        <EventCard key={event.id}>
+                          <EventDate>
+                            <EventDay>{day}</EventDay>
+                            <EventMonth>{month}</EventMonth>
+                          </EventDate>
+                          <EventDetails>
+                            <EventTitle>{event.title}</EventTitle>
+                            <EventMeta>
+                              <EventTime>
+                                {new Date(event.start_date || event.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                                {event.end_date && ` - ${new Date(event.end_date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`}
+                              </EventTime>
+                              <EventLocation>{event.location || event.venue || event.location_address}</EventLocation>
+                            </EventMeta>
+                            <EventDescription>{event.excerpt || event.description || event.summary}</EventDescription>
+                            <EventLink to={`/events/${event.slug}`}>Learn More</EventLink>
+                          </EventDetails>
+                          {(event.image_url || event.image || event.featured_image?.public_url) && (
+                            <EventImage>
+                              <img src={event.image_url || event.image || event.featured_image?.public_url} alt={event.title} />
+                            </EventImage>
+                          )}
+                        </EventCard>
+                      );
+                    })}
+                  </EventsGrid>
+                </UpcomingEventsSection>
+              )}
               
-              <UpcomingEventsSection>
-                <SectionTitle>Upcoming Events</SectionTitle>
-                <EventsGrid>
-                  {events.map((event) => {
-                    const eventDate = new Date(event.start_date);
-                    const day = eventDate.getDate();
-                    const month = eventDate.toLocaleString('default', { month: 'short' }).toUpperCase();
-                    
-                    return (
-                      <EventCard key={event.id}>
-                        <EventDate>
-                          <EventDay>{day}</EventDay>
-                          <EventMonth>{month}</EventMonth>
-                        </EventDate>
-                        <EventDetails>
-                          <EventTitle>{event.title}</EventTitle>
-                          <EventMeta>
-                            <EventTime>
-                              {new Date(event.start_date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-                              {event.end_date && ` - ${new Date(event.end_date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`}
-                            </EventTime>
-                            <EventLocation>{event.location}</EventLocation>
-                          </EventMeta>
-                          <EventDescription>{event.excerpt || event.description}</EventDescription>
-                          <EventLink to={`/events/${event.slug}`}>Learn More</EventLink>
-                        </EventDetails>
-                        {event.image_url && (
-                          <EventImage>
-                            <img src={event.image_url} alt={event.title} />
-                          </EventImage>
-                        )}
-                      </EventCard>
-                    );
-                  })}
-                </EventsGrid>
-              </UpcomingEventsSection>
+              {/* No Content Message */}
+              {((activeFilter === 'news' && filteredNews.length === 0) || 
+                (activeFilter === 'events' && filteredEvents.length === 0)) && (
+                <NoContentMessage>
+                  <h3>No {activeFilter} available</h3>
+                  <p>There are currently no {activeFilter} to display. Please check back later or try a different filter.</p>
+                </NoContentMessage>
+              )}
             </>
           )}
         </SectionContent>
@@ -208,6 +256,22 @@ const TabLink = styled(Link)`
   border-bottom: 3px solid ${props => props.active ? "var(--primary-color)" : "transparent"};
   margin-bottom: -1px;
   white-space: nowrap;
+  
+  &:hover {
+    color: var(--primary-color);
+  }
+`;
+
+const TabButton = styled.button`
+  padding: 12px 24px;
+  color: ${props => props.active ? "var(--primary-color)" : "var(--text-secondary)"};
+  font-weight: ${props => props.active ? "600" : "400"};
+  border: none;
+  background: none;
+  border-bottom: 3px solid ${props => props.active ? "var(--primary-color)" : "transparent"};
+  margin-bottom: -1px;
+  white-space: nowrap;
+  cursor: pointer;
   
   &:hover {
     color: var(--primary-color);
@@ -455,6 +519,51 @@ const EventImage = styled.div`
   @media (max-width: 768px) {
     height: 200px;
     flex: unset;
+  }
+`;
+
+const NotificationBar = styled.div`
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  
+  ${props => props.type === 'error' && `
+    background-color: #fee2e2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+  `}
+  
+  ${props => props.type === 'success' && `
+    background-color: #d1fae5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+  `}
+  
+  ${props => props.type === 'info' && `
+    background-color: #dbeafe;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+  `}
+`;
+
+const NoContentMessage = styled.div`
+  text-align: center;
+  padding: 60px 20px;
+  background-color: var(--background-light);
+  border-radius: 12px;
+  margin: 40px 0;
+  
+  h3 {
+    color: var(--text-primary);
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.6;
   }
 `;
 

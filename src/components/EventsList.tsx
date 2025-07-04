@@ -1,46 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Event } from '../types/api';
-import { EventService } from '../services/api';
 import { formatDateShort } from '../utils/dateFormatter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarXmark } from '@fortawesome/free-solid-svg-icons';
 import LoadingSpinner from './shared/LoadingSpinner';
 import ErrorMessage from './shared/ErrorMessage';
+import { useEvents, NotificationState } from '../hooks/useNewsAndEvents.jsx';
 
 const EventsList: React.FC = () => {
-  const [events, setEvents] = useState<Event[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [notification, setNotification] = useState<NotificationState | null>(null);
 
-  const fetchEvents = async () => {
-    try {
-      setLoading(true);
-      const response = await EventService.getAllEvents();
-      
-      if (response.status === 200) {
-        setEvents(response.data);
-        setError(null);
-      } else {
-        setError(response.message || 'Failed to load events. Please try again later.');
-      }
-    } catch (err) {
-      setError('An unexpected error occurred. Please try again later.');
-      console.error('Events fetch error:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchEvents();
-  }, []);
+  const { 
+    events, 
+    isLoading: loading, 
+    error 
+  } = useEvents({
+    filters: {},
+    onNotificationChange: setNotification
+  });
 
   if (loading) {
     return <LoadingSpinner message="Loading events..." />;
   }
 
   if (error) {
-    return <ErrorMessage message={error} onRetry={fetchEvents} />;
+    return <ErrorMessage message={error.message || 'Failed to load events'} onRetry={() => window.location.reload()} />;
   }
 
   if (events.length === 0) {
@@ -58,7 +42,7 @@ const EventsList: React.FC = () => {
   return (
     <div className="events-list">
       <h2>Upcoming Events</h2>
-      {events.map(event => (
+      {events.map((event: Event) => (
         <div key={event.id} className="event-card">
           {event.featured_image && Object.keys(event.featured_image).length > 0 && (
             <div className="event-image">

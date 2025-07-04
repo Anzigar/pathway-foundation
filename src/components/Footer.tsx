@@ -43,7 +43,10 @@ const Footer: React.FC = () => {
                 </li>
                 <li className="footer-contact-item">
                   <FontAwesomeIcon icon={faPhone} className="footer-icon" />
-                  <a href="tel:+255765363751">+255 765 363 751</a>
+                  <div>
+                    <strong>USA:</strong> <a href="tel:+13464207021">+1 (346) 420-7021</a><br />
+                    <strong>Tanzania:</strong> <a href="tel:+255765363751">+255 765 363 751</a>
+                  </div>
                 </li>
                 <li className="footer-contact-item">
                   <FontAwesomeIcon icon={faEnvelope} className="footer-icon" />

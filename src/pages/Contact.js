@@ -175,8 +175,18 @@ const ContactPage = () => {
                 <FaPhone />
               </ContactIcon>
               <ContactInfoContent>
-                <ContactInfoTitle>Phone</ContactInfoTitle>
-                <ContactInfoText>+255 678 495 109</ContactInfoText>
+                <ContactInfoTitle>Phone (USA)</ContactInfoTitle>
+                <ContactInfoText>+1 (346) 420-7021</ContactInfoText>
+              </ContactInfoContent>
+            </ContactInfoCard>
+            
+            <ContactInfoCard>
+              <ContactIcon>
+                <FaPhone />
+              </ContactIcon>
+              <ContactInfoContent>
+                <ContactInfoTitle>Phone (Tanzania)</ContactInfoTitle>
+                <ContactInfoText>+255 684 412 476</ContactInfoText>
               </ContactInfoContent>
             </ContactInfoCard>
             
